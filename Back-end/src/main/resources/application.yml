@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: local
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 50
+        temp:
+          use_jdbc_metadata_defaults: false
+    open-in-view: false
+
+server:
+  servlet:
+    context-path: /odm
+  port: 8080

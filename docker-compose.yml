@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: db
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_DB: db
+       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+    networks:
+      - website
+
+  frontend:
+    image: nginx:alpine
+    container_name: site
+    ports:
+      - "80:80"
+    volumes:
+      - ./Front-end:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    networks:
+      - website
+
+  backend:
+    depends_on:
+      - db
+    image: eclipse-temurin:21-jdk-alpine
+    container_name: spring-app
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./Back-end/target/home-services-booking-0.0.1-SNAPSHOT.jar:/app/app.jar
+    working_dir: /app
+    command: ["java", "-jar", "app.jar","--spring.profiles.active=dev"]
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - website
+
+
+volumes:
+    data:
+
+networks:
+  website:
+    driver: bridge
