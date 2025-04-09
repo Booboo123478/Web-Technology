@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 40px;
+    background: linear-gradient(to right, #17c3b2, #a0e2dc);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    color: #222;
+  }
+  
+  .footer-section {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+  
+  .footer-section.logo {
+    background-color: #ddd;
+    border-radius: 999px;
+    width: 80px;              /* ✅ Slimmer */
+    height: 50px;             /* ✅ Original height */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .footer-section.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0; /* no gap, use padding instead */
+    font-size: 14px;
+  }
+  
+  .footer-section.links a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    position: relative;
+    padding: 0 12px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .footer-section.links a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-section.links a:not(:last-child)::after {
+    content: "|";
+    position: absolute;
+    right: 0;
+    transform: translateX(50%);
+    color: #444;
+    font-size: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .footer-section.social {
+    background-color: #ddd;
+    height: 50px;
+    width: fit-content;
+    padding: 0 15px;
+    border-radius: 999px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  /* ✅ Desktop layout */
+  @media (min-width: 600px) {
+    .footer {
+      flex-wrap: nowrap;
+      text-align: left;
+    }
+  
+    .footer-section {
+      flex: 1 1 auto;
+      text-align: left;
+    }
+  
+    .footer-section.logo {
+      margin: 0;
+    }
+  
+    .footer-section.social {
+      text-align: right;
+      margin: 0;
+    }
+  }
+  

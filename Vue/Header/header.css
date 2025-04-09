@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #17c3b2, #a0e2dc);
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    background-color: lightgray;
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .icons svg {
+    width: 24px;
+    height: 24px;
+    stroke: black;
+    stroke-width: 1.5;
+    fill: none;
+    cursor: pointer;
+  }
+  
