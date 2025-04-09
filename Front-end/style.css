@@ -1,7 +1,76 @@
-div {
-    background-color: darksalmon;
-    font-weight: bold;
-    font-size: 140px;
-    padding: 0 15px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 1); 
-}
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .extra-section {
+    background-color: #181818;
+    padding: 80px 20px;
+    text-align: center;
+    color: #f0f0f0;
+    font-size: 1.2em;
+  }
+  
+  /* Canvas */
+  #bubble-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Hero Text */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ccc;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .title {
+    font-size: 3.5em;
+    color: silver;
+  }
+  
+  .subtitle {
+    font-size: 2em;
+    color: #66f8e7;
+    margin-top: 0.5em;
+  }
+  
+  .tagline {
+    font-size: 1.1em;
+    margin-top: 1em;
+    color: #999;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  
