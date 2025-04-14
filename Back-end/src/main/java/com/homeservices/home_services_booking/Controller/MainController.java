@@ -9,8 +9,7 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("title", "Accueil");
-        model.addAttribute("content", "home :: content");
-        return "base";
+        model.addAttribute("header", "Header/header :: header");
+        return "index";
     }
 }
