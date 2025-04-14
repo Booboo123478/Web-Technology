@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"></html>
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <div th:fragment="header"></div>
 
   <canvas id="bubble-canvas"></canvas>
   
