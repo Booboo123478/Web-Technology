@@ -1,4 +1,4 @@
-package com;
+package com.homeservices.home_services_booking.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +11,6 @@ public class MainController {
     public String home(Model model) {
         model.addAttribute("title", "Accueil");
         model.addAttribute("content", "home :: content");
-        return "base";  // Vue "base.html"
+        return "Front-end/base";  // Vue "base.html"
     }
 }
