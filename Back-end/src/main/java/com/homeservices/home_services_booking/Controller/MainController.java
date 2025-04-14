@@ -11,6 +11,6 @@ public class MainController {
     public String home(Model model) {
         model.addAttribute("title", "Accueil");
         model.addAttribute("content", "home :: content");
-        return "Front-end/base";  // Vue "base.html"
+        return "base";
     }
 }
