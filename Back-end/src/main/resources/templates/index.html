@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"></html>
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notre Super Site</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<header th:replace="Header/header :: header"></header>
+<body>
+
+  <canvas id="bubble-canvas"></canvas>
+  
+  <div class="hero-content">
+    <h1 class="title">Titre de notre super site</h1>
+    <h2 class="subtitle">internet</h2>
+    <p class="tagline">Sous-titre</p>
+  </div>
+
+  <div class="extra-section">
+    <h2>Section bonus</h2>
+    <p>Voici un contenu caché en bas de la page, il faut scroller !</p>
+</div>
+
+
+  <!-- After the footer -->
+
+<script src="bubbles.js"></script>
+  
+</body>
+</html>
