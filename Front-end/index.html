@@ -7,7 +7,9 @@
   <title>Notre Super Site</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
-<header th:replace="${header}"></header>
+
+<div id="header"></div>
+
 <body>
 
   <canvas id="bubble-canvas"></canvas>
@@ -24,9 +26,25 @@
 </div>
 
 
+<div id="footer"></div>
+
+
   <!-- After the footer -->
 
 <script src="bubbles.js"></script>
+<script>
+  fetch('Header/header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+
+  fetch('Footer/footer.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
   
 </body>
 </html>
