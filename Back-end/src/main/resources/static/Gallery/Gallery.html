@@ -14,14 +14,7 @@
 
         <div class="gallery-container">
             <h1>Galerie</h1>
-            <div class="gallery-grid">
-                <img src="./Images/OIP.jpeg" alt="Image 1" />
-                <img src="./Images/OIP.jpeg" alt="Image 2" />
-                <img src="./Images/OIP.jpeg" alt="Image 3" />
-                <img src="./Images/OIP.jpeg" alt="Image 4" />
-                <img src="./Images/OIP.jpeg" alt="Image 5" />
-                <img src="./Images/OIP.jpeg" alt="Image 6" />
-            </div>
+            <div class="gallery-grid"></div>
         </div>
 
         <div id="footer"></div>
@@ -37,6 +30,11 @@
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('footer').innerHTML = data;
+                });
+            fetch('Card/Card.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('gallery-grid').innerHTML = data;
                 });
         </script>
 </html>
