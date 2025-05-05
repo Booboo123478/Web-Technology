@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Galerie</title>
+        <link rel="stylesheet" href="Gallery.css">
+    </head>
+
+    <body>
+        <div id="header"></div>
+
+        <div class="gallery-container">
+            <h1>Galerie</h1>
+            <div class="gallery-grid">
+                <img src="./Images/OIP.jpeg" alt="Image 1" />
+                <img src="./Images/OIP.jpeg" alt="Image 2" />
+                <img src="./Images/OIP.jpeg" alt="Image 3" />
+                <img src="./Images/OIP.jpeg" alt="Image 4" />
+                <img src="./Images/OIP.jpeg" alt="Image 5" />
+                <img src="./Images/OIP.jpeg" alt="Image 6" />
+            </div>
+        </div>
+
+        <div id="footer"></div>
+
+        <script>
+            fetch('./Header/header.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+
+            fetch('./Footer/footer.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                });
+        </script>
+</html>
