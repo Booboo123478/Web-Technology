@@ -12,9 +12,17 @@
     <body>
         <div id="header"></div>
 
-        <div class="gallery-container">
+        <div class="gallery-container1">
             <h1>Galerie</h1>
-            <div id="gallery-grid"></div>
+            <div class="gallery-container">
+                <div class="gallery-card">
+                  <img src="#" alt="Image 1"/>
+                  <div class="Title"><h1>Titre</h1></div>
+                  <div class="Description">Description</div>
+                  <div class="Price">Price</div>
+                  <button class="Button">Button</button>
+                </div>
+              </div>
         </div>
 
         <div id="footer"></div>
@@ -30,11 +38,6 @@
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('footer').innerHTML = data;
-                });
-            fetch('Card/Card.html')
-                .then(res => res.text())
-                .then(data => {
-                    document.getElementById('gallery-grid').innerHTML = data;
                 });
         </script>
 </html>
