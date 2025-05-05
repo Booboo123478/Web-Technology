@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Galerie</title>
         <link rel="stylesheet" href="Gallery.css">
+        <link rel="stylesheet" href="../Header/header.css">
+        <link rel="stylesheet" href="../Footer/footerDarkMode.css">
     </head>
 
     <body>
@@ -25,13 +27,13 @@
         <div id="footer"></div>
 
         <script>
-            fetch('Header/header.html')
+            fetch('../Header/header.html')
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('header').innerHTML = data;
                 });
 
-            fetch('Footer/footer.html')
+            fetch('../Footer/footer.html')
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('footer').innerHTML = data;
