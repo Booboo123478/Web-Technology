@@ -25,13 +25,13 @@
         <div id="footer"></div>
 
         <script>
-            fetch('././Header/header.html')
+            fetch('./Header/header.html')
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('header').innerHTML = data;
                 });
 
-            fetch('././Footer/footer.html')
+            fetch('./Footer/footer.html')
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('footer').innerHTML = data;
