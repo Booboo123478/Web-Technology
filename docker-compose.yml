@@ -22,7 +22,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./Front-end:/usr/share/nginx/html:ro
+      - ./Back-end/src/main/resources/static:/usr/share/nginx/html:ro
     restart: unless-stopped
     networks:
       - website
