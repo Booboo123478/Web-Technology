@@ -7,9 +7,11 @@ spring:
   profiles:
     active: local
   datasource:
-    url: jdbc:postgresql://db:5432/nom_de_ta_base 
+    url: jdbc:postgresql://db:5432/db
+    #url: jdbc:postgresql://localhost:5434/db
     username: postgres 
     password: ${POSTGRES_PASSWORD}
+    # password: myNotSoSecretPassword
     driver-class-name: org.postgresql.Driver 
   jpa:
     hibernate:
@@ -24,7 +26,3 @@ spring:
         show_sql: true 
     open-in-view: false
 
-server:
-  servlet:
-    context-path: /odm 
-  port: 8080 

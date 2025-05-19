@@ -40,7 +40,7 @@ services:
     command: ["java", "-jar", "app.jar","--spring.profiles.active=dev"]
     ports:
       - "8080:8080"
-    restart: unless-stopped
+    restart: no
     networks:
       - website
 

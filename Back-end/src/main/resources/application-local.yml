@@ -1,8 +1,27 @@
 spring:
   datasource:
+    # password: myNotSoSecretPassword
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
     username: postgres
-    url:  jdbc:postgresql://localhost:5432/db
+    url: jdbc:postgresql://db:5432/db
+    # url: jdbc:postgresql://localhost:5432/db
   jpa:
     show-sql: 'true'
+
+  # spring:
+  # datasource:
+  #   url: jdbc:postgresql://localhost:5434/db
+  #   # url: jdbc:postgresql://db:5432/db
+  #   username: postgres
+  #   password: myNotSoSecretPassword
+  #   driver-class-name: org.postgresql.Driver
+
+  # jpa:
+  #   hibernate:
+  #     ddl-auto: update
+  #   show-sql: true
+  #   properties:
+  #     hibernate:
+  #       format_sql: true
+

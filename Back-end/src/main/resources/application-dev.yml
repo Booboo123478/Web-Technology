@@ -1,8 +1,16 @@
 spring:
   datasource:
-    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    username: postgres
     url: jdbc:postgresql://db:5432/db
+    username: postgres
+    #password: myNotSoSecretPassword
+    password: ${POSTGRES_PASSWORD}
+
   jpa:
-    show-sql: 'true'
+    show-sql: true
+    # hibernate:
+    #   ddl-auto: update  
+    # properties:
+    #   hibernate:
+    #     format_sql: true  
+
