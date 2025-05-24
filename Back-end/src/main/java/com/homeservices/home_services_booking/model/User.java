@@ -18,7 +18,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    // Getters
+
     public Long getId() {
         return id;
     }
@@ -31,7 +31,6 @@ public class User implements Serializable {
         return password;
     }
 
-    // Setters
     public void setId(Long id) {
         this.id = id;
     }
