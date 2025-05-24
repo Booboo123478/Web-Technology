@@ -1,6 +1,9 @@
 package com.homeservices.home_services_booking.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class User implements Serializable {
 
@@ -9,12 +12,13 @@ public class User implements Serializable {
     private String password;
     private String mail;
     private Long role;
-    private String dateInscription;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateInscription;
 
     public User() {  
     }
 
-    public User(Long idUser, String userName, String password,String mail, Long role, String dateInscription) {
+    public User(Long idUser, String userName, String password,String mail, Long role, LocalDate dateInscription) {
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
@@ -32,6 +36,7 @@ public class User implements Serializable {
         return userName;
     }
 
+
     public String getPassword() {
         return password;
     }
@@ -44,7 +49,7 @@ public class User implements Serializable {
         return role;
     }
 
-    public String getDateInscription(){
+    public LocalDate getDateInscription(){
         return dateInscription;
     }
 
@@ -64,7 +69,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public void setDateInscription(String dateInscription){
+    public void setDateInscription(LocalDate dateInscription){
         this.dateInscription = dateInscription;
     }
 
