@@ -64,6 +64,6 @@ public class Message implements Serializable {
                ", idMessage_Expediteur='" + idMessage_Expediteur +
                ", idMessage_Destinataire='" + idMessage_Destinataire +
                ", contenu=" + contenu + 
-               ", dateEnvoie=" + dateEnvoi +"}";
+               ", dateEnvoi=" + dateEnvoi +"}";
     }
 }
