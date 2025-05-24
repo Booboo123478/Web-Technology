@@ -1,9 +1,9 @@
 [ {
-  "idUtilisateur" : 0,
-  "username" : "test",
+  "idUser" : 0,
+  "userName" : "test",
   "password" : "Test1234ù",
-  "email" : "test@gmail.com",
-  "role" : "admin",
+  "mail" : "test@gmail.com",
+  "role" : 2,
   "dateInscription" : "2025-04-20"
 }, {
   "idUtilisateur" : 1,
