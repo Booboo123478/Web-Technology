@@ -1,0 +1,10 @@
+[
+    {
+    "idUtilisateur":0,
+    "nom":"test",
+    "email":"test@gmail.com",
+    "motDePasse":"Test1234ù",
+    "role":"admin",
+    "dateInscription":"2025-04-20"
+    }
+]
