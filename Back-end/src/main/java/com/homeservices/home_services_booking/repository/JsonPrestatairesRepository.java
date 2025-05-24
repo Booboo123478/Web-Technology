@@ -46,21 +46,21 @@ public class JsonPrestatairesRepository {
         return prestataires;
     }
 
-    public Optional<Prestataire> findByPrestatairename(String prestatairename) {
+    public Optional<Prestataire> findByIdPrestataire(Long idPrestataire) {
         return prestataires.stream()
-                .filter(u -> u.getPrestataireName().equalsIgnoreCase(prestatairename))
+                .filter(u -> u.getIdPrestataire().equals(idPrestataire))
                 .findFirst();
     }
 
     public Prestataire save(Prestataire prestataire) {
-        findByPrestatairename(prestataire.getPrestataireName()).ifPresent(prestataires::remove);
+        findByIdPrestataire(prestataire.getIdPrestataire()).ifPresent(prestataires::remove);
         prestataires.add(prestataire);
         savePrestatairesToFile();
         return prestataire;
     }
 
-    public void delete(String prestatairename) {
-        prestataires.removeIf(u -> u.getPrestataireName().equalsIgnoreCase(prestatairename));
+    public void delete(Long idPrestataire) {
+        prestataires.removeIf(u -> u.getIdPrestataire().equals(idPrestataire));
         savePrestatairesToFile();
     }
 }

@@ -21,7 +21,7 @@ public class Prestataire implements Serializable {
         this.localisation = localisation;
     }
 
-    public Long getId() {
+    public Long getIdPrestataire() {
         return idPrestataire;
     }
 

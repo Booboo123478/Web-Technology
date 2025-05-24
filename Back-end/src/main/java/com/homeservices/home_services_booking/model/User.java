@@ -24,7 +24,7 @@ public class User implements Serializable {
     }
 
 
-    public Long getId() {
+    public Long getIdUser() {
         return idUser;
     }
 
