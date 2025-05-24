@@ -1,10 +1,15 @@
-[
-    {
-    "idUtilisateur":0,
-    "nom":"test",
-    "email":"test@gmail.com",
-    "motDePasse":"Test1234ù",
-    "role":"admin",
-    "dateInscription":"2025-04-20"
-    }
-]
+[ {
+  "idUtilisateur" : 0,
+  "username" : "test",
+  "password" : "Test1234ù",
+  "email" : "test@gmail.com",
+  "role" : "admin",
+  "dateInscription" : "2025-04-20"
+}, {
+  "idUtilisateur" : 1,
+  "username" : "AAA",
+  "password" : "aaa",
+  "email" : "AAA@gmail.com",
+  "role" : null,
+  "dateInscription" : null
+} ]
