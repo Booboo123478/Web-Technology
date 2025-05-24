@@ -46,21 +46,21 @@ public class JsonUserRepository {
         return users;
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByUserName(String userName) {
         return users.stream()
-                .filter(u -> u.getUsername().equalsIgnoreCase(username))
+                .filter(u -> u.getUserName().equalsIgnoreCase(userName))
                 .findFirst();
     }
 
     public User save(User user) {
-        findByUsername(user.getUsername()).ifPresent(users::remove);
+        findByUserName(user.getUserName()).ifPresent(users::remove);
         users.add(user);
         saveUsersToFile();
         return user;
     }
 
-    public void delete(String username) {
-        users.removeIf(u -> u.getUsername().equalsIgnoreCase(username));
+    public void delete(String userName) {
+        users.removeIf(u -> u.getUserName().equalsIgnoreCase(userName));
         saveUsersToFile();
     }
 }

@@ -48,19 +48,19 @@ public class JsonPrestatairesRepository {
 
     public Optional<Prestataire> findByPrestatairename(String prestatairename) {
         return prestataires.stream()
-                .filter(u -> u.getPrestatairename().equalsIgnoreCase(prestatairename))
+                .filter(u -> u.getPrestataireName().equalsIgnoreCase(prestatairename))
                 .findFirst();
     }
 
     public Prestataire save(Prestataire prestataire) {
-        findByPrestatairename(prestataire.getPrestatairename()).ifPresent(prestataires::remove);
+        findByPrestatairename(prestataire.getPrestataireName()).ifPresent(prestataires::remove);
         prestataires.add(prestataire);
         savePrestatairesToFile();
         return prestataire;
     }
 
     public void delete(String prestatairename) {
-        prestataires.removeIf(u -> u.getPrestatairename().equalsIgnoreCase(prestatairename));
+        prestataires.removeIf(u -> u.getPrestataireName().equalsIgnoreCase(prestatairename));
         savePrestatairesToFile();
     }
 }

@@ -4,50 +4,75 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private Long id;
-    private String username;
+    private Long idUser;
+    private String userName;
     private String password;
+    private String mail;
+    private Long role;
+    private String dateInscription;
 
-    // Constructeur par défaut requis pour la sérialisation JSON
     public User() {  
     }
 
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
+    public User(Long idUser, String userName, String password,String mail, Long role, String dateInscription) {
+        this.idUser = idUser;
+        this.userName = userName;
         this.password = password;
+        this.mail = mail;
+        this.role = role;
+        this.dateInscription = dateInscription;
     }
 
 
     public Long getId() {
-        return id;
+        return idUser;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
         return password;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    
+    public String getMail(){
+        return mail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Long getRole(){
+        return role;
+    }
+
+    public String getDateInscription(){
+        return dateInscription;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public void setMail(String mail){
+        this.mail = mail;
+    }
+
+    public void setRole(Long role){
+        this.role = role;
+    }
+
+    public void setDateInscription(String dateInscription){
+        this.dateInscription = dateInscription;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-               "id=" + id +
-               ", username='" + username + '\'' +
+               "idUser=" + idUser +
+               ", userName='" + userName + '\'' +
                ", password='[PROTECTED]'}";
     }
 }
