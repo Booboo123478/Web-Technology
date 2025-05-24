@@ -61,7 +61,9 @@ public class Prestataire implements Serializable {
     public String toString() {
         return "Prestataire{" +
                "idPrestataire=" + idPrestataire +
+               ",idPrestataire_User="+ idPrestataire_User +
                ", prestataireName='" + prestataireName + '\'' +
-               ", localisation='[PROTECTED]'}";
+               ",description=" + description +  
+               ", localisation=" + localisation +"}";
     }
 }
