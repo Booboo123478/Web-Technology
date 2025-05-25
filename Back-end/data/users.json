@@ -1,21 +1,21 @@
 [ {
-  "idUser" : 0,
-  "userName" : "test",
-  "password" : "Test1234ù",
-  "mail" : "test@gmail.com",
-  "role" : 2,
-  "dateInscription" : "2025-04-20"
-}, {
   "idUser" : 1,
-  "userName" : "AAA",
-  "password" : "aaa",
-  "mail" : "AAA@gmail.com",
+  "userName" : "test6",
+  "password" : "56562414",
+  "mail" : "test@gmail.com",
   "role" : 0,
-  "dateInscription" : "2025-04-20"
+  "dateInscription" : "2025-05-25"
 }, {
-  "idUser" : 3,
-  "userName" : "user",
-  "password" : "65491865374",
+  "idUser" : 2,
+  "userName" : "test7",
+  "password" : "1236587896",
+  "mail" : "test@gmail.com",
+  "role" : 0,
+  "dateInscription" : "2025-05-25"
+}, {
+  "idUser" : 4,
+  "userName" : "test8",
+  "password" : "1236587896",
   "mail" : "test@gmail.com",
   "role" : 0,
   "dateInscription" : "2025-05-25"
