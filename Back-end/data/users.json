@@ -6,10 +6,17 @@
   "role" : 2,
   "dateInscription" : "2025-04-20"
 }, {
-  "idUtilisateur" : 1,
-  "username" : "AAA",
+  "idUser" : 1,
+  "userName" : "AAA",
   "password" : "aaa",
-  "email" : "AAA@gmail.com",
-  "role" : null,
-  "dateInscription" : null
+  "mail" : "AAA@gmail.com",
+  "role" : 0,
+  "dateInscription" : "2025-04-20"
+}, {
+  "idUser" : 3,
+  "userName" : "user",
+  "password" : "65491865374",
+  "mail" : "test@gmail.com",
+  "role" : 0,
+  "dateInscription" : "2025-05-25"
 } ]
