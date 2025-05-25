@@ -1,8 +1,11 @@
 package com.homeservices.home_services_booking.controller;
 
+import java.net.URI;
 import java.time.LocalDate;
+import java.util.Optional;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,23 +25,36 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User registerUser(@RequestParam String userName,
-                             @RequestParam String password,
-                             @RequestParam String mail) {
-        LocalDate dateInscription = LocalDate.now();
+    public ResponseEntity<Void> registerUser(@RequestParam String userName,
+                                            @RequestParam String password,
+                                            @RequestParam String mail
+                                            ) {
+        final LocalDate dateInscription = LocalDate.now();
 
         // Get max existing id and increment
         long newId = userRepository.getMaxId() + 1;
 
-        System.out.println("Registering user: username=" + userName + ", email=" + mail);
+        System.out.println("Requête d'inscription reçue : username=" + userName + ", password=" + password + ", email=" + mail);
         User user = new User(newId, userName, password, mail, 0L, dateInscription);
         User savedUser = userRepository.save(user);
-        System.out.println("User saved: " + savedUser.getUserName());
-        return savedUser;
+        System.out.println("Utilisateur sauvegardé : " + savedUser.getUserName());
+        URI redirectUri = URI.create("/index.html");
+        return ResponseEntity.status(HttpStatus.FOUND).location(redirectUri).build();
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "Test OK";
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestParam String mail,
+                                        @RequestParam String password) {
+        System.out.println("Tentative de connexion : " + mail);
+        Optional<User> optionalUser = userRepository.findAll().stream()
+            .filter(u -> u.getMail().equals(mail) && u.getPassword().equals(password))
+            .findFirst();
+        if (optionalUser.isPresent()) {
+            System.out.println("Connexion réussie pour : " + mail);
+            return ResponseEntity.ok(optionalUser.get());
+        } else {
+            System.out.println("Échec de connexion pour : " + mail);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
+        }
     }
 }
