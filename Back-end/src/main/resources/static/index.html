@@ -2,10 +2,11 @@
 <html lang="fr">
   
 <head>
+  <link rel="stylesheet" href="style.css"/>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notre Super Site</title>
-  <link rel="stylesheet" href="style.css"/>
+  
 </head>
 
 <div id="header"></div>
@@ -39,7 +40,19 @@
   <!-- After the footer -->
 
 <script src="bubbles.js"></script>
+<script>
+  fetch('Header/header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
 
+  fetch('Footer/footer.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
   
 </body>
 </html>
