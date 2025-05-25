@@ -5,7 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./Back-end/src/main/resources/static:/Back-end/src/main/resources/static
+      - ./Back-end/src/main/resources/static:/usr/share/nginx/html:ro
     restart: unless-stopped
     networks:
       - website
