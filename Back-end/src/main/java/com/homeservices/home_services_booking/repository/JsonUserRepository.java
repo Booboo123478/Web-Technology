@@ -15,65 +15,58 @@ public class JsonUserRepository {
 
     private final File jsonFile;
     private final ObjectMapper objectMapper;
-    private List<User> users;
 
     public JsonUserRepository(String filePath) {
         this.jsonFile = new File(filePath);
-        System.out.println("Chemin fichier JSON : " + jsonFile.getAbsolutePath());
+        System.out.println("JSON file path: " + jsonFile.getAbsolutePath());
         this.objectMapper = new ObjectMapper();
-        this.users = loadUsersFromFile();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     private List<User> loadUsersFromFile() {
-        System.out.println("Tentative de chargement des utilisateurs depuis le fichier...");
         if (!jsonFile.exists()) {
-            System.out.println("Le fichier JSON n'existe pas, on retourne une liste vide.");
             return new ArrayList<>();
         }
         try {
-            // Enregistre le module JavaTimeModule pour gérer LocalDate
-            objectMapper.registerModule(new JavaTimeModule());
-
             List<User> loadedUsers = objectMapper.readValue(jsonFile, new TypeReference<List<User>>() {});
-            System.out.println("Utilisateurs chargés : " + loadedUsers.size());
-            return loadedUsers;
+            return loadedUsers != null ? loadedUsers : new ArrayList<>();
         } catch (IOException e) {
-            System.out.println("Erreur lors de la lecture du fichier JSON : " + e.getMessage());
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
 
-    private void saveUsersToFile() {
-        System.out.println("Sauvegarde des utilisateurs dans le fichier JSON...");
+    private void saveUsersToFile(List<User> users) {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, users);
-            System.out.println("Sauvegarde réussie.");
         } catch (IOException e) {
-            System.out.println("Erreur lors de la sauvegarde du fichier JSON : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     public List<User> findAll() {
-        return users;
+        return loadUsersFromFile();
     }
 
     public Optional<User> findByUserName(String userName) {
-        return users.stream()
+        return loadUsersFromFile().stream()
                 .filter(u -> u.getUserName().equalsIgnoreCase(userName))
                 .findFirst();
     }
 
     public User save(User user) {
-        findByUserName(user.getUserName()).ifPresent(users::remove);
+        List<User> users = loadUsersFromFile();
+        // Remove existing user with same username (if any)
+        users.removeIf(u -> u.getUserName().equalsIgnoreCase(user.getUserName()));
         users.add(user);
-        saveUsersToFile();
+        saveUsersToFile(users);
         return user;
     }
 
-    public void delete(String userName) {
-        users.removeIf(u -> u.getUserName().equalsIgnoreCase(userName));
-        saveUsersToFile();
+    public long getMaxId() {
+        return loadUsersFromFile().stream()
+                .mapToLong(u -> u.getIdUser() != null ? u.getIdUser() : 0L)
+                .max()
+                .orElse(0L);
     }
 }
