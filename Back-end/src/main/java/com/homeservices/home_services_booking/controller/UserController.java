@@ -25,9 +25,10 @@ public class UserController {
     @PostMapping("/register")
     public User registerUser(@RequestParam String userName,
                             @RequestParam String password,
-                            @RequestParam String mail,
-                            @RequestParam Long role,
-                            @RequestParam LocalDate dateInscription) {
+                            @RequestParam String mail
+                            ) {
+        final LocalDate dateInscription = LocalDate.now();
+
         System.out.println("Requête d'inscription reçue : username=" + userName + ", password=" + password + ", email=" + mail);
         User user = new User(idCounter.getAndIncrement(), userName, password, mail, (long) 0, dateInscription);
         User savedUser = userRepository.save(user);
