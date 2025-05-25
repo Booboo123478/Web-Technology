@@ -20,6 +20,11 @@ public class UserController {
 
     public UserController() {
         this.userRepository = new JsonUserRepository("/Back-end/data/users.json");
+        long maxId = userRepository.findAll().stream()
+        .mapToLong(User -> User.getIdUser() != null ? User.getIdUser() : 0L)
+        .max()
+        .orElse(0L);
+    this.idCounter.set(maxId + 1);
     }
 
     @PostMapping("/register")
