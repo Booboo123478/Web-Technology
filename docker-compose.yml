@@ -6,6 +6,9 @@ services:
       - "80:80"
     volumes:
       - ./Back-end/src/main/resources/static:/usr/share/nginx/html:ro
+      - ./Back-end/data:/Back-end/data
+      - ./Back-end/src/main/java/homeservices/home_services_booking/controller:/Back-end/src/main/java/homeservices/home_services_booking/controller
+
     restart: unless-stopped
     networks:
       - website
