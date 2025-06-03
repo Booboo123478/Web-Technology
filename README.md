@@ -10,11 +10,15 @@
 ## Installation et lancement
 
 ### 1. Compiler et packager le backend
-```mvn clean package```
+```bash
+mvn clean package
+```
 
 ### 2. Lancer les conteneurs Docker
-```docker compose up -d```
+```bash
+docker compose up
+```
 
 ### 3. Accéder à l’application
-Frontend Local : http://localhost:8080/odm
+Frontend Local : http://localhost:8080/
 Frontend Serveur : https://corta-web-tech.ordredumalt.com/

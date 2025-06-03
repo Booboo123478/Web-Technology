@@ -10,10 +10,51 @@
   <h1>Mon Profil</h1>
 
   <section id="profile-info">
-    <p><strong>Nom d'utilisateur :</strong> <span id="username">Utilisateur</span></p>
-    <p><strong>Email :</strong> <span id="email">user@example.com</span></p>
+    <p><strong>Nom d'utilisateur :</strong> <span id="username">Chargement...</span></p>
+    <p><strong>Email :</strong> <span id="email">Chargement...</span></p>
   </section>
 
+  <p id="error-message" style="color: red;"></p>
+  <button id="logout-btn">Se déconnecter</button>
   <a href="/">Retour à l'accueil</a>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/users/profile');
+
+        if (response.ok) {
+          const user = await response.json();
+          document.getElementById('username').textContent = user.userName;
+          document.getElementById('email').textContent = user.mail;
+        } else if (response.status === 401) {
+          document.getElementById('error-message').textContent = "Vous devez vous connecter pour voir votre profil.";
+        } else {
+          document.getElementById('error-message').textContent = "Erreur lors du chargement du profil.";
+        }
+      } catch (error) {
+        console.error("Erreur réseau :", error);
+        document.getElementById('error-message').textContent = "Erreur réseau ou serveur.";
+      }
+    });
+      document.getElementById("logout-btn").addEventListener("click", async function () {
+      try {
+        const response = await fetch("/users/logout", {
+          method: "POST",
+          credentials: "include"
+        });
+
+        if (response.ok) {
+          // Redirige vers la page d'accueil
+          window.location.href = "/index.html";
+        } else {
+          alert("Échec de la déconnexion.");
+        }
+      } catch (error) {
+        console.error("Erreur lors de la déconnexion :", error);
+        alert("Erreur réseau.");
+      }
+    });
+  </script>
 </body>
 </html>
