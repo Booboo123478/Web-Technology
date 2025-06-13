@@ -1,0 +1,41 @@
+.btn {
+  padding: 12px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Variants */
+.btn.primary {
+  background-color: #00d0b0;
+  color: #121212;
+}
+
+.btn.primary:hover {
+  background-color: #00f0c0;
+}
+
+.btn.secondary {
+  background-color: #444;
+  color: #fff;
+}
+
+.btn.secondary:hover {
+  background-color: #666;
+}
+
+.btn.danger {
+  background-color: #d33;
+  color: #fff;
+}
+
+.btn.danger:hover {
+  background-color: #f55;
+}
+
+.full-width {
+  width: 100%;
+}
