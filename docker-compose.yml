@@ -4,6 +4,8 @@ services:
       context: ./front-end
       dockerfile: Dockerfile
     container_name: react-app
+    ports:
+      - "80:80"
     volumes:
       - ./front-end:/app
       - /app/node_modules
