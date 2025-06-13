@@ -26,3 +26,6 @@ spring:
         show_sql: true 
     open-in-view: false
 
+app:
+  users:
+    file: data/users.json

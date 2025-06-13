@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputField from '../../components/common/InputField';
 import './Auth.css';
 import Button from '../../components/common/Button/Button';
+import axios from 'axios';
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const Register: React.FC = () => {
     setError('');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const { email, password, confirmPassword } = formData;
@@ -44,8 +45,25 @@ const Register: React.FC = () => {
       return;
     }
 
-    console.log('Register:', formData);
-  };
+    try {
+    await axios.post(
+      '/api/users/register',
+      new URLSearchParams({
+        userName: email.split('@')[0],
+        mail: email,
+        password: password,
+      }),
+      { withCredentials: true,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+       } 
+    );
+
+    window.location.href = '/';
+  } catch (err) {
+    console.error(err);
+    setError('Erreur lors de l’inscription. Veuillez réessayer.');
+  }
+};
 
   return (
     <div className="auth-container">

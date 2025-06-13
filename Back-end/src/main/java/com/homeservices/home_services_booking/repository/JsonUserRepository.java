@@ -48,6 +48,10 @@ public class JsonUserRepository {
         return loadUsersFromFile();
     }
 
+    public String getFilePath() {
+        return this.jsonFile.toString();
+    }
+
     public Optional<User> findByUserName(String userName) {
         return loadUsersFromFile().stream()
                 .filter(u -> u.getUserName().equalsIgnoreCase(userName))

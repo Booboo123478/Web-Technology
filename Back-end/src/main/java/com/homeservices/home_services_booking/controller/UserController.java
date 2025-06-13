@@ -4,6 +4,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +19,13 @@ import com.homeservices.home_services_booking.repository.JsonUserRepository;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final JsonUserRepository userRepository;
 
-    public UserController() {
-        this.userRepository = new JsonUserRepository("/Back-end/data/users.json");
+    public UserController(@Value("${app.users.file}") String userFilePath) {
+        this.userRepository = new JsonUserRepository(userFilePath);
     }
 
     @PostMapping("/register")
@@ -35,14 +36,12 @@ public class UserController {
                                             ) {
         final LocalDate dateInscription = LocalDate.now();
 
-        // Get max existing id and increment
         long newId = userRepository.getMaxId() + 1;
 
         System.out.println("Requête d'inscription reçue : username=" + userName + ", password=" + password + ", email=" + mail);
         User user = new User(newId, userName, password, mail, 0L, dateInscription);
         User savedUser = userRepository.save(user);
 
-        // Stocker l'utilisateur dans la session
         session.setAttribute("user", savedUser);
 
         System.out.println("Utilisateur sauvegardé : " + savedUser.getUserName());

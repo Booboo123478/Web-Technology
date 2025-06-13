@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputField from '../../components/common/InputField';
 import './Auth.css';
 import Button from '../../components/common/Button/Button';
+import axios from 'axios';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -14,20 +15,38 @@ const Login: React.FC = () => {
   
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
+
+    const { email, password } = formData;
+
+    if (!email || !password) {
       setError('Tous les champs sont requis.');
       return;
     }
 
-    if (!validateEmail(formData.email)) {
+    if (!validateEmail(email)) {
       setError('Adresse e-mail invalide.');
       return;
     }
 
-    // If valid:
-    console.log('Login:', formData);
+    try {
+      const response = await axios.post(
+        '/api/users/login',
+        new URLSearchParams({
+          mail: email,
+          password: password,
+        }),
+        { withCredentials: true }
+      );
+
+      console.log('Login réussi :', response.data);
+      window.location.href = '/home'; 
+
+    } catch (err) {
+      console.error(err);
+      setError('Identifiants incorrects ou erreur serveur.');
+    }
   };
 
   return (
