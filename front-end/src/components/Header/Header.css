@@ -17,7 +17,8 @@ body {
   }
   
   /* Logo pill */
-  .logo {
+  .logo, 
+  .logo a{
     background-color: #bcbcbc;
     border: 1px solid #cfcfcf;
     border-radius: 999px;
