@@ -13,7 +13,6 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_URL=http://localhost/users
-    command: ["npm", "run", "build"]
     depends_on:
       - backend
     networks:
