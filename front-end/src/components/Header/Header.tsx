@@ -4,7 +4,13 @@ import './Header.css';
 const Header: React.FC = () => {
   return (
     <div className="navbar">
-      <a href='/home'><div className="logo">LOGO</div></a>
+      <div className="logo"><a href='/home'>LOGO</a></div>
+      <div className="footer-section links">
+        <a href="/services">Services</a>
+        <a href="/...">...</a>
+        <a href="/...">...</a>
+      </div>
+
       <div className="icons">
         {/* Chat Bubble Icon */}
         <svg viewBox="0 0 24 24">

@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
         <a href="/plan-du-site">Plan du site</a>
       </div>
 
-      <div className="footer-section social">
-        Les réseaux
+      <div className="footer-section logout">
+        <a href='/logout'>Logout</a>
       </div>
     </footer>
   );
