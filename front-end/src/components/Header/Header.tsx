@@ -10,6 +10,7 @@ const Header: React.FC = () => {
         <a href="/...">...</a>
         <a href="/...">...</a>
       </div>
+
       <div className="icons">
         {/* Chat Bubble Icon */}
         <svg viewBox="0 0 24 24">
@@ -23,10 +24,12 @@ const Header: React.FC = () => {
         </svg>
 
         {/* User Icon */}
+        <a href='/profile'>
         <svg viewBox="0 0 24 24">
           <circle cx="12" cy="7" r="4"/>
           <path d="M5.5 21a8.38 8.38 0 0113 0"/>
         </svg>
+        </a>
       </div>
     </div>
   );

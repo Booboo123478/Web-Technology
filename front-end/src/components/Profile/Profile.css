@@ -1,0 +1,110 @@
+.profile-header {
+  display: flex;
+  margin: 15vh;
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 20px rgba(0, 255, 191, 0.2);
+  max-width: 1000px;
+  width: 100%;
+  gap: 4rem;
+  color: #f0f0f0;
+}
+
+.profile-left {
+  text-align: center;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #00d0b0;
+  background-color: #2c2c2c;
+  object-fit: cover;
+}
+
+.profile-right {
+  flex-grow: 1;
+}
+
+.profile-bio {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 20px;
+  color: #ccc;
+}
+
+.profile-interests ul {
+  padding-left: 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.profile-interests li {
+  background-color: #00d0b0;
+  color: #121212;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.profile-right p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  padding-left: 20px;
+  color: #f0f0f0;
+}
+
+.profile-button {
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: -1rem;
+}
+
+.role-badge {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.role-badge.client {
+  background-color: #2dd4be;
+  color: #121212;
+}
+
+.role-badge.provider {
+  background-color: #facc15;
+  color: #121212;
+}
+
+.role-badge.admin {
+  background-color: #f87171;
+  color: #121212;
+}
+
+.profile-pic-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #2dd4beac;
+  margin: 40px 0px 40px 0px;
+}

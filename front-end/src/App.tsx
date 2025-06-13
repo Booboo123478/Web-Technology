@@ -7,8 +7,10 @@ import Profile from './Pages/Profile/Profile';
 import Terms from './Pages/Legal/Terms';
 import Privacy from './Pages/Legal/Privacy';
 
+
   function App() {
     return (
+      <div style={{backgroundColor: '#00d0b129', minHeight: '100vh'}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -21,6 +23,7 @@ import Privacy from './Pages/Legal/Privacy';
 
         </Routes>
       </BrowserRouter>
+      </div>
     );
   }
 
