@@ -19,3 +19,13 @@ app:
     file: data/users.json
   messages:
     file: data/messages.json
+  prestataires:
+    file: data/prestataires.json
+  avis:
+    file: data/avis.json
+  paiements:
+    file: data/paiements.json
+  reservations:
+    file: data/reservations.json
+  services:
+    file: data/services.json
