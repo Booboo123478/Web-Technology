@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor; // Génère le constructeur avec tous les arguments
+import lombok.Data;  // Génère tous les getters, setters, equals, hashCode et toString
+import lombok.NoArgsConstructor; // Génère le constructeur sans arguments
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
 
     private Long idUser;
@@ -14,64 +20,6 @@ public class User implements Serializable {
     private Long role;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateInscription;
-
-    public User() {  
-    }
-
-    public User(Long idUser, String userName, String password,String mail, Long role, LocalDate dateInscription) {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
-        this.mail = mail;
-        this.role = role;
-        this.dateInscription = dateInscription;
-    }
-
-
-    public Long getIdUser() {
-        return idUser;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-    
-    public String getMail(){
-        return mail;
-    }
-
-    public Long getRole(){
-        return role;
-    }
-
-    public LocalDate getDateInscription(){
-        return dateInscription;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setMail(String mail){
-        this.mail = mail;
-    }
-
-    public void setRole(Long role){
-        this.role = role;
-    }
-
-    public void setDateInscription(LocalDate dateInscription){
-        this.dateInscription = dateInscription;
-    }
 
     @Override
     public String toString() {

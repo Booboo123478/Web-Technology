@@ -25,7 +25,7 @@ services:
     container_name: spring-app
     volumes:
       - ./Back-end/target/home-services-booking-0.0.1-SNAPSHOT.jar:/app/app.jar
-      - ./Back-end/data:/app/Back-end/data
+      - ./Back-end/data:/app/data
     working_dir: /app
     command: ["java", "-jar", "app.jar", "--spring.profiles.active=dev"]
     ports:

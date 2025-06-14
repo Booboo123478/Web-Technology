@@ -1,7 +1,9 @@
 package com.homeservices.home_services_booking.controller;
 
+import java.io.File;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +41,7 @@ public class UserController {
         long newId = userRepository.getMaxId() + 1;
 
         System.out.println("Requête d'inscription reçue : username=" + userName + ", password=" + password + ", email=" + mail);
+        System.out.println("Saving file at: " + new File("data/users.json").getAbsolutePath());
         User user = new User(newId, userName, password, mail, 0L, dateInscription);
         User savedUser = userRepository.save(user);
 
@@ -68,7 +71,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/me")
     public ResponseEntity<?> getProfile(HttpSession session) {
         User user = (User) session.getAttribute("user");
 
@@ -82,6 +85,12 @@ public class UserController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
+        System.out.println("Déconnection");
         return ResponseEntity.ok("Déconnecté");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }
