@@ -3,6 +3,7 @@ package com.homeservices.home_services_booking.controller;
 import java.io.File;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -86,5 +87,10 @@ public class UserController {
         session.invalidate();
         System.out.println("Déconnection");
         return ResponseEntity.ok("Déconnecté");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }

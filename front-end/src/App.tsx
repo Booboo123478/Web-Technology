@@ -6,6 +6,7 @@ import Register from './Pages/Auth/Register';
 import Profile from './Pages/Profile/Profile';
 import Terms from './Pages/Legal/Terms';
 import Privacy from './Pages/Legal/Privacy';
+import Messaging from './Pages/Messaging/Messaging';
 
 
   function App() {
@@ -18,6 +19,7 @@ import Privacy from './Pages/Legal/Privacy';
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/messaging" element={<Messaging />} />
           <Route path='/CGU' element={<Terms />} />
           <Route path='/politique-de-confidentialite' element={<Privacy />} />
 
