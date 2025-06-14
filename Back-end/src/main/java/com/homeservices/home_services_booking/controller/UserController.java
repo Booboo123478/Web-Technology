@@ -70,7 +70,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/me")
     public ResponseEntity<?> getProfile(HttpSession session) {
         User user = (User) session.getAttribute("user");
 
@@ -84,6 +84,7 @@ public class UserController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
+        System.out.println("Déconnection");
         return ResponseEntity.ok("Déconnecté");
     }
 }

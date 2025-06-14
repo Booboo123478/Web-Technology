@@ -4,14 +4,18 @@ import Button from "../common/Button/Button";
 import Modal from "../common/Modal/Modal";
 import ProfileEdit from "./ProfileEdit";
 
+type Role = 'client' | 'provider' | 'admin';
+
 type Profile = {
-  email: string;
+  idUser: number;
   username: string;
-  role: 'client' | 'provider' | 'admin';
+  email: string;
+  role: Role;
   profilePic?: string;
   bio?: string;
   interests?: string[];
 };
+
 
 type Props = {
   profile: Profile;
@@ -132,11 +136,16 @@ const togglePictureModal = () => {
     </div>
 
         <Modal isOpen={showPictureModal} onClose={() => setShowPictureModal(false)} title="Modifier la photo">
-            <input type="file" accept="image/*" />
+          <form onSubmit={handlePictureSubmit}>
+            <input
+              type="file"
+              accept="image/*"
+              aria-label="Téléverser une image de profil"
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+            />
             <Button text="Enregistrer" type="submit" />
-        </Modal>
-
-         
+          </form>
+        </Modal>        
     </div>
   );
 }
