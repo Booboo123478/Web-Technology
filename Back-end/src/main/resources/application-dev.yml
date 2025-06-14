@@ -17,3 +17,5 @@ spring:
 app:
   users:
     file: data/users.json
+  messages:
+    file: data/messages.json

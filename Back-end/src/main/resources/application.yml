@@ -28,6 +28,6 @@ spring:
 
 app:
   users:
-    file: Back-end/data/users.json
+    file: data/users.json
   messages:
-    file: Back-end/data/messages.json
+    file: data/messages.json
