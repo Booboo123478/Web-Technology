@@ -55,9 +55,17 @@ public class PrestataireController {
         return repository.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<Prestataire> createPrestataire(@RequestBody Prestataire prestataire) {
-        System.out.println("Prestataire reçu : " + prestataire);
+    @PostMapping("/register")
+    public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userName,
+                                            @RequestParam String password,
+                                            @RequestParam String email,
+                                            @RequestParam String description,
+                                            HttpSession session  ) {
+        System.out.println("Prestataire reçu : " + userName + " email : " + email);
+        
+        long newId = repository.getMaxId() +1;
+        Prestataire prestataire = new Prestataire(newId, password,email, userName, description);
+
         Prestataire saved = repository.save(prestataire);
         return ResponseEntity.ok(saved);
     }

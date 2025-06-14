@@ -36,7 +36,10 @@ public class JsonPrestatairesRepository {
 
     public Prestataire save(Prestataire prestataire) {
         List<Prestataire> prestataires = findAll();
-        prestataires.removeIf(p -> p.getIdPrestataire().equals(prestataire.getIdPrestataire()));
+        prestataires.removeIf(p ->
+            p.getIdPrestataire() != null &&
+            p.getIdPrestataire().equals(prestataire.getIdPrestataire())
+        );
         prestataires.add(prestataire);
         try {
             mapper.writeValue(file, prestataires);

@@ -60,7 +60,6 @@ public class JsonUserRepository {
 
     public User save(User user) {
         List<User> users = loadUsersFromFile();
-        // Remove existing user with same username (if any)
         users.removeIf(u -> u.getUserName().equalsIgnoreCase(user.getUserName()));
         users.add(user);
         saveUsersToFile(users);

@@ -39,14 +39,22 @@ const RegisterPrestataire: React.FC = () => {
 
     try {
       await axios.post(
-        '/api/prestataires',
-        formData,
-        { withCredentials: true }
+        '/api/prestataires/register',
+        new URLSearchParams({
+          userName: formData.prestataireName,
+          email: formData.prestataireMail,
+          password: formData.password,
+          description: formData.description
+        }),
+        { withCredentials: true,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+         }
       );
+    
 
       setSuccess('Inscription réussie !');
       setTimeout(() => {
-        window.location.href = '/';
+        window.location.href = '/home';
       }, 1500);
     } catch (err) {
       console.error(err);
