@@ -77,6 +77,10 @@ const Register: React.FC = () => {
         <p className="switch-link">
           Déjà inscrit ? <a href="/login">Connexion</a>
         </p>
+        <p>
+          Vous êtes prestataire ?&nbsp;
+          <a href="/inscription-prestataire">Inscrivez-vous ici</a>
+        </p>
       </form>
     </div>
   );

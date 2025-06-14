@@ -1,91 +1,74 @@
 package com.homeservices.home_services_booking.model;
 
-import java.io.Serializable;
+import java.util.List;
 
-public class Service implements Serializable {
+import com.homeservices.home_services_booking.dto.DisponibiliteDto;
 
+public class Service {
     private Long idService;
-    private Long idService_Prestataire;
-    private String serviceName;
-    private Long price;
+    private Long idPrestataire;
+    private String titre;
+    private String metier;
+    private String ville;
+    private String adresse;
+    private Double prix;
     private String description;
-    private String categorie;
-    private String dureeEstimee;
 
-    public Service() {  
-    }
+    private List<DisponibiliteDto> disponibilites;  // DTO exposé dans l'API
+    private String offreImageUrl;
 
-    public Service(Long idService,Long idService_Prestataire, String serviceName,Long price, String description, String categorie, String dureeEstimee) {
+    private transient List<Disponibilite> disponibilitesMetier; // Usage métier, non sérialisé
+
+    public Service() {}
+
+    public Service(Long idService, Long idPrestataire, String titre, String metier, String ville, String adresse,
+                   Double prix, String description, List<DisponibiliteDto> disponibilites,
+                   String offreImageUrl, List<Disponibilite> disponibilitesMetier) {
         this.idService = idService;
-        this.idService_Prestataire = idService_Prestataire;
-        this.serviceName = serviceName;
-        this.price = price;
+        this.idPrestataire = idPrestataire;
+        this.titre = titre;
+        this.metier = metier;
+        this.ville = ville;
+        this.adresse = adresse;
+        this.prix = prix;
         this.description = description;
-        this.categorie = categorie;
-        this.dureeEstimee = dureeEstimee;
+        this.disponibilites = disponibilites;
+        this.offreImageUrl = offreImageUrl;
+        this.disponibilitesMetier = disponibilitesMetier;
     }
 
-    public Long getIdService() {
-        return idService;
-    }
+    // Getters et setters
 
-    public Long getIdService_Prestataire() {
-        return idService_Prestataire;
-    }
+    public Long getIdService() { return idService; }
+    public void setIdService(Long idService) { this.idService = idService; }
 
-    public String getServiceName() {
-        return serviceName;
-    }
+    public Long getIdPrestataire() { return idPrestataire; }
+    public void setIdPrestataire(Long idPrestataire) { this.idPrestataire = idPrestataire; }
 
-    public Long getPrice() {
-        return price;
-    }
+    public String getTitre() { return titre; }
+    public void setTitre(String titre) { this.titre = titre; }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getMetier() { return metier; }
+    public void setMetier(String metier) { this.metier = metier; }
 
-    public String getCategorie() {
-        return categorie;
-    }
+    public String getVille() { return ville; }
+    public void setVille(String ville) { this.ville = ville; }
 
-    public String getDureeEstimee() {
-        return dureeEstimee;
-    }
+    public String getAdresse() { return adresse; }
+    public void setAdresse(String adresse) { this.adresse = adresse; }
 
-    public void setIdService_Prestataire(Long idService_Prestataire) {
-        this.idService_Prestataire = idService_Prestataire;
-    }
+    public Double getPrix() { return prix; }
+    public void setPrix(Double prix) { this.prix = prix; }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setPrice(Long price) {
-        this.price = price;
-    }
+    public List<DisponibiliteDto> getDisponibilites() { return disponibilites; }
+    public void setDisponibilites(List<DisponibiliteDto> disponibilites) { this.disponibilites = disponibilites; }
 
-    public void setDescription(String description) {
-        this.description= description;
-    }
+    public String getOffreImageUrl() { return offreImageUrl; }
+    public void setOffreImageUrl(String offreImageUrl) { this.offreImageUrl = offreImageUrl; }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public void setDureeEstimee(String dureeEstimee) {
-        this.dureeEstimee = dureeEstimee;
-    }
-
-    @Override
-    public String toString() {
-        return "Service{" +
-               "idService=" + idService +
-               ",idService_Prestataire="+ idService_Prestataire +
-               ", serviceName='" + serviceName +
-               ", price="+ price +
-               ",description=" + description +  
-               ", categorie=" + categorie +
-               ", dureeEstimee" + dureeEstimee + "}";
-    }
+    public List<Disponibilite> getDisponibilitesMetier() { return disponibilitesMetier; }
+    public void setDisponibilitesMetier(List<Disponibilite> disponibilitesMetier) { this.disponibilitesMetier = disponibilitesMetier; }
 }

@@ -1,69 +1,61 @@
 package com.homeservices.home_services_booking.model;
 
-import java.io.Serializable;
-
-public class Prestataire implements Serializable {
-
+public class Prestataire {
     private Long idPrestataire;
-    private Long idPrestataire_User;
+    private String password;
+    private String prestataireMail; 
     private String prestataireName;
     private String description;
-    private String localisation;
 
-    public Prestataire() {  
-    }
+    // Constructeur vide requis pour la désérialisation JSON
+    public Prestataire() {}
 
-    public Prestataire(Long idPrestataire,Long idPrestataire_User, String prestataireName,String description, String localisation) {
+    public Prestataire(Long idPrestataire, String password, String prestataireMail, String prestataireName, String description) {
         this.idPrestataire = idPrestataire;
-        this.idPrestataire_User = idPrestataire_User;
+        this.password = password;
+        this.prestataireMail = prestataireMail;
         this.prestataireName = prestataireName;
         this.description = description;
-        this.localisation = localisation;
     }
 
+    // Getters et setters
     public Long getIdPrestataire() {
         return idPrestataire;
     }
 
-    public Long getIdPrestataire_User() {
-        return idPrestataire_User;
+    public void setIdPrestataire(Long idPrestataire) {
+        this.idPrestataire = idPrestataire;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPrestataireMail() {
+        return prestataireMail;
+    }
+
+    public void setPrestataireMail(String prestataireMail) {
+        this.prestataireMail = prestataireMail;
     }
 
     public String getPrestataireName() {
         return prestataireName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLocalisation() {
-        return localisation;
-    }
-
-    public void setIdPrestataire_User(Long idPrestataire_User) {
-        this.idPrestataire_User = idPrestataire_User;
-    }
-
     public void setPrestataireName(String prestataireName) {
         this.prestataireName = prestataireName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
-        this.description= description;
-    }
-
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
-    }
-
-    @Override
-    public String toString() {
-        return "Prestataire{" +
-               "idPrestataire=" + idPrestataire +
-               ",idPrestataire_User="+ idPrestataire_User +
-               ", prestataireName='" + prestataireName + '\'' +
-               ",description=" + description +  
-               ", localisation=" + localisation +"}";
+        this.description = description;
     }
 }

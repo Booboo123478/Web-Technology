@@ -6,6 +6,7 @@ import Register from './Pages/Auth/Register';
 import Profile from './Pages/Profile/Profile';
 import Terms from './Pages/Legal/Terms';
 import Privacy from './Pages/Legal/Privacy';
+import InscriptionPrestataire from './Pages/Auth/InscriptionPrestataire';
 
 
   function App() {
@@ -20,7 +21,7 @@ import Privacy from './Pages/Legal/Privacy';
           <Route path="/profile" element={<Profile />} />
           <Route path='/CGU' element={<Terms />} />
           <Route path='/politique-de-confidentialite' element={<Privacy />} />
-
+          <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
         </Routes>
       </BrowserRouter>
       </div>

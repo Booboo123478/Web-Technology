@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class JsonServicesRepository {
 
@@ -62,5 +63,11 @@ public class JsonServicesRepository {
     public void delete(Long idService) {
         services.removeIf(u -> u.getIdService().equals(idService));
         saveServicesToFile();
+    }
+
+    public List<Service> findByPrestataireId(Long idPrestataire) {
+        return findAll().stream()
+            .filter(s -> s.getIdPrestataire().equals(idPrestataire))
+            .collect(Collectors.toList());
     }
 }

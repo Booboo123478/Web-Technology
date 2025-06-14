@@ -8,59 +8,55 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class JsonPrestatairesRepository {
 
-    private final File jsonFile;
-    private final ObjectMapper objectMapper;
-    private List<Prestataire> prestataires;
+    private final File file;
+    private final ObjectMapper mapper;
 
     public JsonPrestatairesRepository(String filePath) {
-        this.jsonFile = new File(filePath);
-        this.objectMapper = new ObjectMapper();
-        this.prestataires = loadPrestatairesFromFile();
-    }
-
-    private List<Prestataire> loadPrestatairesFromFile() {
-        if (!jsonFile.exists()) {
-            return new ArrayList<>();
-        }
-        try {
-            return objectMapper.readValue(jsonFile, new TypeReference<List<Prestataire>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
-    private void savePrestatairesToFile() {
-        try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, prestataires);
-        } catch (IOException e) {
-            e.printStackTrace();
+        this.file = new File(filePath);
+        this.mapper = new ObjectMapper();
+        if (!file.exists()) {
+            try {
+                mapper.writeValue(file, new ArrayList<Prestataire>());
+            } catch (IOException e) {
+                throw new RuntimeException("Impossible d'initialiser le fichier prestataires", e);
+            }
         }
     }
 
     public List<Prestataire> findAll() {
-        return prestataires;
-    }
-
-    public Optional<Prestataire> findByIdPrestataire(Long idPrestataire) {
-        return prestataires.stream()
-                .filter(u -> u.getIdPrestataire().equals(idPrestataire))
-                .findFirst();
+        try {
+            return mapper.readValue(file, new TypeReference<List<Prestataire>>() {});
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur de lecture du fichier prestataires", e);
+        }
     }
 
     public Prestataire save(Prestataire prestataire) {
-        findByIdPrestataire(prestataire.getIdPrestataire()).ifPresent(prestataires::remove);
+        List<Prestataire> prestataires = findAll();
+        prestataires.removeIf(p -> p.getIdPrestataire().equals(prestataire.getIdPrestataire()));
         prestataires.add(prestataire);
-        savePrestatairesToFile();
+        try {
+            mapper.writeValue(file, prestataires);
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur d'écriture dans le fichier prestataires", e);
+        }
         return prestataire;
     }
 
-    public void delete(Long idPrestataire) {
-        prestataires.removeIf(u -> u.getIdPrestataire().equals(idPrestataire));
-        savePrestatairesToFile();
+    public Prestataire findById(Long id) {
+        return findAll().stream()
+                .filter(p -> p.getIdPrestataire().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public long getMaxId() {
+        return findAll().stream()
+                .mapToLong(Prestataire::getIdPrestataire)
+                .max()
+                .orElse(0);
     }
 }
