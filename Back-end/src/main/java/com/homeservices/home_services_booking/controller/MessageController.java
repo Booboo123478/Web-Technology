@@ -3,7 +3,11 @@ package com.homeservices.home_services_booking.controller;
 import com.homeservices.home_services_booking.model.Message;
 import com.homeservices.home_services_booking.model.User;
 import com.homeservices.home_services_booking.repository.JsonMessageRepository;
+import com.homeservices.home_services_booking.repository.JsonUserRepository;
+
 import jakarta.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +21,8 @@ public class MessageController {
 
     private final JsonMessageRepository messageRepository;
 
-    public MessageController(JsonMessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    public MessageController(@Value("${app.message.file}") String messageFilePath) {
+        this.messageRepository = new JsonMessageRepository(messageFilePath);
     }
 
     @PostMapping

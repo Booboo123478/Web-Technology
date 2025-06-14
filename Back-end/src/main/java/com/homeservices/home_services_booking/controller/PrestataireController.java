@@ -46,8 +46,8 @@ public class PrestataireController {
 
     private final JsonPrestatairesRepository repository;
 
-    public PrestataireController() {
-        this.repository = new JsonPrestatairesRepository("/app/Back-end/data/prestataires.json");
+    public PrestataireController(@Value("${app.prestataires.file}") String filePath) {
+        this.repository = new JsonPrestatairesRepository(filePath);
     }
 
     @GetMapping
