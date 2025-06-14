@@ -21,7 +21,7 @@ public class MessageController {
 
     private final JsonMessageRepository messageRepository;
 
-    public MessageController(@Value("${app.message.file}") String messageFilePath) {
+    public MessageController(@Value("${app.messages.file}") String messageFilePath) {
         this.messageRepository = new JsonMessageRepository(messageFilePath);
     }
 
