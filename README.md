@@ -5,7 +5,6 @@
 - Backend : Java 21, Spring Boot 3.4.3  
 - Frontend : HTML, CSS, JavaScript, Bootstrap (servi via Nginx)  
 - Stockage : fichiers JSON  
-- Conteneurisation : Docker & Docker Compose  
 
 ## Installation et lancement
 
@@ -14,11 +13,16 @@
 mvn clean package
 ```
 
-### 2. Lancer les conteneurs Docker
+### 2. Lancer l'application
 ```bash
-docker compose up
+./mvnw spring-boot:run
 ```
 
-### 3. Accéder à l’application
+### 3. Lancer le front
+```bash
+npm start
+```
+
+### 4. Accéder à l’application
 Frontend Local : http://localhost:8080/
 Frontend Serveur : https://corta-web-tech.ordredumalt.com/
