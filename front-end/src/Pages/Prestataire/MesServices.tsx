@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import Button from '../../components/common/Button/Button';
 
 interface Service {
   idService: number;
@@ -58,25 +61,13 @@ const MesServices: React.FC<MesServicesProps> = ({ idPrestataire }) => {
     }
   };
   return (
-    <div>
+    <><Header />
+    <div style={{ padding: '2rem', maxWidth: '100vw', margin: '10vh auto' }}>
       <h2>Mes services</h2>
 
-      <button
-        onClick={() => {
-          window.location.href = "/ajouter-service";
-        }}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#00d0b0",
-          color: "#121212",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-        }}
-      >
-        Ajouter un nouveau service
-      </button>
+      <Button text={'Ajouter un nouveau service'} onClick={() => {
+        window.location.href = "/ajouter-service";
+      }} />
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {services.map(s => (
@@ -102,40 +93,15 @@ const MesServices: React.FC<MesServicesProps> = ({ idPrestataire }) => {
               <p><strong>Prix :</strong> {s.prix} €</p>
             </div>
             <div style={{ marginLeft: 'auto' }}>
-              <button
-                onClick={() => window.location.href = `/modifier-service/${s.idService}`}
-                style={{
-                  marginRight: '10px',
-                  backgroundColor: '#ffc107',
-                  border: 'none',
-                  padding: '6px 10px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  color: '#121212'
-                }}
-              >
-                Modifier
-              </button>
-
-              <button
-                onClick={() => handleDelete(s.idService)}
-                style={{
-                  backgroundColor: '#dc3545',
-                  border: 'none',
-                  padding: '6px 10px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  color: '#fff'
-                }}
-              >
-                Supprimer
-              </button>
+              <Button text={'Supprimer'} onClick={() => handleDelete(s.idService)} />
+              <Button text={'Modifier'} onClick={() => window.location.href = `/modifier-service/${s.idService}`} />
             </div>
           </li>
         ))}
       </ul>
     </div>
+    <Footer />
+    </>
   );
 };
-
 export default MesServices;

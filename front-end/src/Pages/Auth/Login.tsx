@@ -41,7 +41,13 @@ const Login: React.FC = () => {
     try {
       const endpoint = userType === 'client' ? '/api/users/login' : '/api/prestataires/login';
 
-      const response = await axios.post(
+      type LoginResponse = {
+        role: string;
+        idUser?: number;
+        idPrestataire?: number;
+      };
+
+      const response = await axios.post<LoginResponse>(
         endpoint,
         { email, password },
         { withCredentials: true }
@@ -53,9 +59,9 @@ const Login: React.FC = () => {
       localStorage.setItem('userRole', role.toString());
 
       if (userType === 'prestataire') {
-        localStorage.setItem('prestataireId', response.data.idPrestataire.toString());
+        localStorage.setItem('prestataireId', response.data.idPrestataire?.toString() ?? '');
       } else {
-        localStorage.setItem('userId', response.data.idUser.toString());
+        localStorage.setItem('userId', response.data.idUser?.toString() ?? '');
       }
 
       window.location.href = '/home';

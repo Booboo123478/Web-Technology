@@ -25,19 +25,19 @@ const Messaging: React.FC = () => {
 
     useEffect(() => {
         // Fetch current user
-        axios.get('/api/users/me')
+        axios.get<User>('/api/users/me')
             .then(response => setCurrentUser(response.data))
             .catch(error => console.error("Error fetching current user:", error));
 
         // Fetch all users to create conversations list
-        axios.get('/api/users')
+        axios.get<User[]>('/api/users')
             .then(response => setUsers(response.data))
             .catch(error => console.error("Error fetching users:", error));
     }, []);
 
     useEffect(() => {
         if (selectedConversation) {
-            axios.get(`/api/messages/${selectedConversation}`)
+            axios.get<Message[]>(`/api/messages/${selectedConversation}`)
                 .then(response => {
                     setMessages(response.data);
                 })
@@ -59,7 +59,7 @@ const Messaging: React.FC = () => {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         })
         .then(response => {
-            setMessages([...messages, response.data]);
+            setMessages([...messages, response.data as Message]);
             setNewMessage('');
         })
         .catch(error => {
@@ -71,8 +71,8 @@ const Messaging: React.FC = () => {
 
     return (
         <>
-            <Header />
-            <div className="messaging-container">
+        <Header />
+            <div className="messaging-container" >
                 <div className="conversations-list">
                     <h3>Conversations</h3>
                     {conversationUsers.map(user => (
