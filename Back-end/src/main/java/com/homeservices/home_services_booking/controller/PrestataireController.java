@@ -2,14 +2,16 @@ package com.homeservices.home_services_booking.controller;
 
 import com.homeservices.home_services_booking.dto.LoginRequest;
 import com.homeservices.home_services_booking.model.Prestataire;
+import com.homeservices.home_services_booking.model.User;
 import com.homeservices.home_services_booking.repository.JsonPrestatairesRepository;
-
-
+import com.homeservices.home_services_booking.repository.JsonUserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,52 +20,75 @@ import java.util.Optional;
 public class PrestataireController {
 
     private final JsonPrestatairesRepository repository;
+    private final JsonUserRepository        userRepository;
 
-    public PrestataireController(@Value("${app.prestataires.file}") String filePath) {
-        this.repository = new JsonPrestatairesRepository(filePath);
+    public PrestataireController(JsonPrestatairesRepository repository,
+                                 @Value("${app.users.file}") String userFilePath) {
+        this.repository     = repository;
+        this.userRepository = new JsonUserRepository(userFilePath);
     }
 
+    /* =========================
+       LISTE DES PRESTATAIRES
+       ========================= */
     @GetMapping
     public List<Prestataire> getAll() {
         return repository.findAll();
     }
 
+    /* =========================
+       INSCRIPTION PRESTATAIRE
+       ========================= */
     @PostMapping("/register")
-    public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userName,
-                                            @RequestParam String password,
-                                            @RequestParam String email,
-                                            @RequestParam String description,
-                                            HttpSession session  ) {
-        System.out.println("Prestataire reçu : " + userName + " email : " + email);
-        
-        long newId = repository.getMaxId() +1;
-        Prestataire prestataire = new Prestataire(newId, password, email, 1L, userName, description);
+public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userName,
+                                                     @RequestParam String password,
+                                                     @RequestParam String email,
+                                                     @RequestParam String description,
+                                                     HttpSession session) {
 
-        Prestataire saved = repository.save(prestataire);
+    long newId = Math.max(repository.getMaxId(), userRepository.getMaxId()) + 1;
 
-        session.setAttribute("prestataire",prestataire);
+    // 1. Enregistrer dans users.json (rôle 1 = prestataire)
+    User newUser = new User(newId, userName, password, email, 1L, LocalDate.now());
+    userRepository.save(newUser);
 
-        return ResponseEntity.ok(saved);
-    }
+    // 2. Enregistrer dans prestataires.json
+    Prestataire prestataire = new Prestataire(newId, password, email, userName, description);
+    Prestataire saved       = repository.save(prestataire);
 
+    // 3. Mettre en session pour connecter immédiatement
+    session.setAttribute("user",       newUser);
+    session.setAttribute("prestataire", saved);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+}
+
+    /* =========================
+       CONNEXION PRESTATAIRE
+       ========================= */
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        String email = loginRequest.getEmail();
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest,
+                                   HttpSession session) {
+
+        String email    = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        Optional<Prestataire> prestataire = repository.findAll().stream()
-            .filter(p -> p.getPrestataireMail().equals(email) && p.getPassword().equals(password))
-            .findFirst();
+        Optional<Prestataire> prestataireOpt = repository.findAll().stream()
+                .filter(p -> p.getPrestataireMail().equals(email) &&
+                             p.getPassword().equals(password))
+                .findFirst();
 
-        prestataire.ifPresent(p -> System.out.println("Prestataire trouvé : " + p.getPrestataireMail()));
-        if (prestataire.isPresent()) {
-            session.setAttribute("prestataire", prestataire.get());
-            return ResponseEntity.ok(prestataire.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
+        if (prestataireOpt.isPresent()) {
+            session.setAttribute("prestataire", prestataireOpt.get());
+            session.setAttribute("user",       userRepository.findByUserName(prestataireOpt.get().getPrestataireName()).orElse(null));
+            return ResponseEntity.ok(prestataireOpt.get());
         }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
     }
 
+    /* =========================
+       PROFIL CONNECTÉ
+       ========================= */
     @GetMapping("/me")
     public ResponseEntity<?> getConnected(HttpSession session) {
         Prestataire prestataire = (Prestataire) session.getAttribute("prestataire");
@@ -71,11 +96,5 @@ public class PrestataireController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Non connecté");
         }
         return ResponseEntity.ok(prestataire);
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpSession session) {
-        session.invalidate();
-        return ResponseEntity.ok("Déconnecté");
     }
 }

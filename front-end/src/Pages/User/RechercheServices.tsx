@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import InputField from '../../components/common/InputField';
+import axios from 'axios';
+import './RechercheServices.css';
 
 interface Service {
   idService: number;
@@ -21,6 +23,9 @@ const RechercheServices: React.FC = () => {
   const [ville, setVille] = useState('');
   const [prixMin, setPrixMin] = useState('');
   const [prixMax, setPrixMax] = useState('');
+  const [date, setDate] = useState('');
+  const [heure, setHeure] = useState('');
+  const [feedback, setFeedback] = useState<{msg:string,color:string}|null>(null);
 
   useEffect(() => {
     fetch('/api/services')
@@ -59,38 +64,51 @@ const RechercheServices: React.FC = () => {
     <div style={{ padding: '2rem', maxWidth: '100vw', margin: '10vh auto' }}>
       <h2>Rechercher un service</h2>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+      <div className="search-toolbar">
         <InputField label="Métier" placeholder="Métier" value={metier} onChange={e => setMetier(e.target.value)} type="text" />
         <InputField label="Ville" placeholder="Ville" value={ville} onChange={e => setVille(e.target.value)} type="text" />
         <InputField label="Prix min" placeholder="Prix min" value={prixMin} onChange={e => setPrixMin(e.target.value)} type="number" />
         <InputField label="Prix max" placeholder="Prix max" value={prixMax} onChange={e => setPrixMax(e.target.value)} type="number" />
-
+        <label>Date&nbsp;
+          <input type="date" value={date} onChange={e=>setDate(e.target.value)} />
+        </label>
+        <label>Heure&nbsp;
+          <input type="time" value={heure} onChange={e=>setHeure(e.target.value)} />
+        </label>
       </div>
+
+      {feedback && <p className="feedback" style={{color:feedback.color}}>{feedback.msg}</p>}
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {filtered.map(s => (
           <li
             key={s.idService}
-            style={{
-              marginBottom: '1rem',
-              border: '1px solid #ddd',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
+            className="service-card"
             onClick={() => window.location.href = `/services/${s.idService}`}
           >
             <img
               src={`/image/${s.offreImageUrl}`}
               alt={`${s.metier} à ${s.ville}`}
-              style={{ width: '100px', height: 'auto', objectFit: 'cover' }}
             />
-            <div>
-              <p><strong>Métier :</strong> {s.metier}</p>
-              <p><strong>Ville :</strong> {s.ville}</p>
-              <p><strong>Prix :</strong> {s.prix} €</p>
+            <div className="service-info">
+              <p><strong>Métier&nbsp;:</strong> {s.metier}</p>
+              <p><strong>Ville&nbsp;:</strong> {s.ville}</p>
+              <p><strong>Prix&nbsp;:</strong> {s.prix} €</p>
             </div>
+            <button className="reserve-btn" onClick={(e)=>{e.stopPropagation();
+              if(!date||!heure){setFeedback({msg:'Sélectionnez date et heure',color:'red'});return;}
+              axios.get('/api/users/me').then(res=>{
+                const idClient=res.data.idUser;
+                const params=new URLSearchParams();
+                params.append('idClient',idClient);
+                params.append('idService',s.idService.toString());
+                params.append('date',date);
+                params.append('heure',heure);
+                return axios.post('/api/reservations',params,{headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+              }).then(()=>{
+                setFeedback({msg:'Réservation enregistrée !',color:'limegreen'});
+              }).catch(err=>{console.error(err);setFeedback({msg:'Erreur réservation',color:'red'});});
+            }}>Réserver</button>
           </li>
         ))}
       </ul>

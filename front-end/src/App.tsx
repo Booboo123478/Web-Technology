@@ -13,6 +13,9 @@ import MesServices from './Pages/Prestataire/MesServices';
 import AjouterService from './Pages/Prestataire/AjouterService';
 import RechercheServices from './Pages/User/RechercheServices';
 import ServiceDetails from './Pages/User/ServiceDetails';
+import ServicesPage from './Pages/Services/ServicesPage';
+import MyReservationsPage from './Pages/Reservations/MyReservationsPage';
+import MesDemandes from './Pages/Prestataire/MesDemandes';
 
 
   function App() {
@@ -37,6 +40,7 @@ import ServiceDetails from './Pages/User/ServiceDetails';
           <Route path='/CGU' element={<Terms />} />
           <Route path='/politique-de-confidentialite' element={<Privacy />} />
           <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
+          <Route path="/register-prestataire" element={<InscriptionPrestataire />} />
           <Route path="/recherche-services" element={<RechercheServices />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
 
@@ -46,7 +50,10 @@ import ServiceDetails from './Pages/User/ServiceDetails';
               element={<MesServices idPrestataire={idPrestaNumber} />}
             />
             <Route path="/ajouter-service" element={<AjouterService />} />
+            <Route path="/mes-demandes" element={<MesDemandes />} />
           </Route>}
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/reservations" element={<MyReservationsPage />} />
         </Routes>
       </BrowserRouter>
       </div>

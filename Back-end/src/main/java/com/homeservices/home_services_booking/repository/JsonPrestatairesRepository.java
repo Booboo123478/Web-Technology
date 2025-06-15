@@ -3,66 +3,72 @@ package com.homeservices.home_services_booking.repository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.homeservices.home_services_booking.model.Prestataire;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class JsonPrestatairesRepository {
 
-    private final File file;
+    private final String filePath;
     private final ObjectMapper mapper;
+    private List<Prestataire> prestataires;
 
-    public JsonPrestatairesRepository(String filePath) {
-        this.file = new File(filePath);
+    public JsonPrestatairesRepository(@Value("${app.prestataires.file}") String filePath) {
+        this.filePath = filePath;
         this.mapper = new ObjectMapper();
-        this.mapper.enable(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT);
-        if (!file.exists()) {
-            try {
-                mapper.writeValue(file, new ArrayList<Prestataire>());
-            } catch (IOException e) {
-                throw new RuntimeException("Impossible d'initialiser le fichier prestataires", e);
-            }
-        }
+        this.prestataires = loadFromFile();
     }
 
-    public List<Prestataire> findAll() {
+    private List<Prestataire> loadFromFile() {
         try {
+            File file = new File(filePath);
+            if (!file.exists() || file.length() == 0) {
+                return new ArrayList<>();
+            }
             return mapper.readValue(file, new TypeReference<List<Prestataire>>() {});
         } catch (IOException e) {
             throw new RuntimeException("Erreur de lecture du fichier prestataires", e);
         }
     }
 
-    public Prestataire save(Prestataire prestataire) {
-        List<Prestataire> prestataires = findAll();
-        if (prestataire.getIdPrestataire() == null) {
-            long newId = getMaxId() + 1;
-            prestataire.setIdPrestataire(newId);
-        } else {
-            prestataires.removeIf(p -> p.getIdPrestataire().equals(prestataire.getIdPrestataire()));
-        }
-        prestataires.add(prestataire);
+    private void saveToFile() {
         try {
-            mapper.writeValue(file, prestataires);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), prestataires);
         } catch (IOException e) {
             throw new RuntimeException("Erreur d'écriture dans le fichier prestataires", e);
         }
+    }
+
+    public List<Prestataire> findAll() {
+        return new ArrayList<>(prestataires);
+    }
+
+    public Prestataire save(Prestataire prestataire) {
+        prestataires.removeIf(p ->
+            p.getIdPrestataire() != null &&
+            p.getIdPrestataire().equals(prestataire.getIdPrestataire())
+        );
+        prestataires.add(prestataire);
+        saveToFile();
         return prestataire;
     }
 
     public Prestataire findById(Long id) {
-        return findAll().stream()
+        return prestataires.stream()
                 .filter(p -> p.getIdPrestataire().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
     public long getMaxId() {
-        return findAll().stream()
+        return prestataires.stream()
                 .mapToLong(Prestataire::getIdPrestataire)
                 .max()
-                .orElse(0);
+                .orElse(0L);
     }
 }

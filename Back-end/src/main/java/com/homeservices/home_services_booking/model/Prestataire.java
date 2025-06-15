@@ -11,7 +11,7 @@ public class Prestataire {
     // Constructeur vide requis pour la désérialisation JSON
     public Prestataire() {}
 
-    public Prestataire(Long idPrestataire, String password, String prestataireMail, Long role, String prestataireName, String description) {
+    public Prestataire(Long idPrestataire, String password, String prestataireMail, String prestataireName, String description) {
         this.idPrestataire = idPrestataire;
         this.password = password;
         this.prestataireMail = prestataireMail;

@@ -4,6 +4,8 @@ import Footer from '../../components/Footer/Footer';
 import ProfileCard from '../../components/Profile/ProfileCard';
 import axios from 'axios';
 import './Profile.css';
+import AvisList from '../../components/Avis/AvisList';
+import AvisForm from '../../components/Avis/AvisForm';
 
 type Role = 'client' | 'provider' | 'admin';
 
@@ -24,44 +26,70 @@ function mapBackendUserToProfile(user: any): Profile {
     2: 'admin',
   };
 
+  // Détection structure prestataire vs client
+  const isPrestataire = user.hasOwnProperty('idPrestataire');
+
   return {
-    idUser: user.idUser,
-    username: user.userName,
-    email: user.mail,
-    role: roleMap[user.role] || 'client',
+    idUser: isPrestataire ? user.idPrestataire : user.idUser,
+    username: isPrestataire ? user.prestataireName : user.userName,
+    email: isPrestataire ? user.prestataireMail : user.mail,
+    role: isPrestataire ? 'provider' : (roleMap[user.role] || 'client'),
     profilePic: user.profilePic,
     bio: user.bio || '',
     interests: user.interests || [],
   };
 }
 
-
 const ProfilePage: React.FC = () => {
-
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError]   = useState('');
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('/api/users/me', {
-          withCredentials: true,
-        });
+        const roleString = localStorage.getItem('userRole');
+        const roleNum = roleString ? parseInt(roleString,10) : 0;
+        const endpoint = roleNum === 1 ? '/api/prestataires/me' : '/api/users/me';
+        const response = await axios.get(endpoint, { withCredentials: true });
         setCurrentUser(mapBackendUserToProfile(response.data));
-      } catch (error) {
-        console.error('Erreur lors de la récupération de l’utilisateur :', error);
+      } catch (err:any) {
+        console.error('Erreur lors de la récupération de l\'utilisateur :', err);
+        setError('Impossible de charger le profil. Êtes-vous connecté ?');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUser();
   }, []);
 
+  const handleAvisSubmit = () => {
+    setRefreshTrigger(prev => prev + 1);
+  };
+
+  if(loading){
+    return <p style={{textAlign:'center',marginTop:'40px'}}>Chargement du profil...</p>;
+  }
+
+  if(error){
+    return <p style={{textAlign:'center',marginTop:'40px',color:'red'}}>{error}</p>;
+  }
+
   return (
     <>
       <Header />
       <main style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
         {currentUser ? (
-          <ProfileCard profile={currentUser} isOwnProfile={true} />
+          <>
+            <ProfileCard profile={currentUser} isOwnProfile={true} />
+            <div className="avis-section">
+              <AvisList idPrestataire={currentUser.idUser} refreshTrigger={refreshTrigger} />
+              {/* Le formulaire d'avis ne doit pas s'afficher sur sa propre page de profil.
+                  Il ne s'affichera que sur les pages de profil publiques d'autres utilisateurs. */}
+            </div>
+          </>
         ) : (
           <p>Chargement du profil...</p>
         )}

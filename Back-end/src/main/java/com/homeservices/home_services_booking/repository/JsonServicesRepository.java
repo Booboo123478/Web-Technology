@@ -51,7 +51,7 @@ public class JsonServicesRepository {
 
     public Optional<Service> findByIdService(Long idService) {
         return services.stream()
-                .filter(u -> java.util.Objects.equals(u.getIdService(), idService))
+                .filter(u -> u.getIdService() == idService)
                 .findFirst();
     }
 
@@ -64,13 +64,13 @@ public class JsonServicesRepository {
 
     @DeleteMapping("/services/{id}")
     public void delete(Long idService) {
-        services.removeIf(u -> java.util.Objects.equals(u.getIdService(), idService));
+        services.removeIf(u -> u.getIdService() == idService);
         saveServicesToFile();
     }
 
     public List<Service> findByPrestataireId(Long idPrestataire) {
         return findAll().stream()
-            .filter(s -> s.getIdPrestataire().equals(idPrestataire))
+            .filter(s -> s.getIdPrestataire()==idPrestataire)
             .collect(Collectors.toList());
     }
 

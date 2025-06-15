@@ -1,45 +1,55 @@
-package com.homeservices.home_services_booking.model;
+/*package com.homeservices.home_services_booking.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reservation implements Serializable {
 
     private Long idReservation;
-    private Long idReservation_Client;
-    private Long idReservation_Services;
-    private Long statut;
+    private Long idClient;
+    private Long idService;
+    private String dateReservation; // ISO yyyy-MM-dd
+    private String statut; // attente | confirmee | terminee
     private String modeDePaiement;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateReservation;
+    private LocalDate dateReservation_LocalDate;
 
     public Reservation() {  
     }
 
-    public Reservation(Long idReservation,Long idReservation_Client, Long idReservation_Services,Long statut,String modeDePaiement, LocalDate dateReservation) {
+    public Reservation(Long idReservation, Long idClient, Long idService, String dateReservation, String statut) {
         this.idReservation = idReservation;
-        this.idReservation_Client = idReservation_Client;
-        this.idReservation_Services = idReservation_Services;
-        this.statut = statut;
-        this.modeDePaiement = modeDePaiement;
+        this.idClient = idClient;
+        this.idService = idService;
         this.dateReservation = dateReservation;
+        this.statut = statut;
     }
 
     public Long getIdReservation() {
         return idReservation;
     }
 
-    public Long getIdReservation_Client() {
-        return idReservation_Client;
+    public Long getIdClient() {
+        return idClient;
     }
 
-    public Long getIdReservation_Services() {
-        return idReservation_Services;
+    public Long getIdService() {
+        return idService;
     }
 
-    public Long getStatut() {
+    public String getDateReservation() {
+        return dateReservation;
+    }
+
+    public String getStatut() {
         return statut;
     }
 
@@ -47,38 +57,47 @@ public class Reservation implements Serializable {
         return modeDePaiement;
     }
 
-    public LocalDate getDateReservation() {
-        return dateReservation;
+    public LocalDate getDateReservation_LocalDate() {
+        return dateReservation_LocalDate;
     }
 
-    public void setIdReservation_Client(Long idReservation_Client) {
-        this.idReservation_Client = idReservation_Client;
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
     }
 
-    public void setIdReservation_Services(Long idReservation_Services) {
-        this.idReservation_Services = idReservation_Services;
+    public void setIdService(Long idService) {
+        this.idService = idService;
     }
 
-    public void setStatut(Long statut) {
-        this.statut= statut;
+    public void setDateReservation(String dateReservation) {
+        this.dateReservation = dateReservation;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
     public void setModeDePaiement(String modeDePaiement) {
-        this.modeDePaiement= modeDePaiement;
+        this.modeDePaiement = modeDePaiement;
     }
 
-    public void setDateReservation(LocalDate dateReservation) {
-        this.dateReservation = dateReservation;
+    public void setDateReservation_LocalDate(LocalDate dateReservation_LocalDate) {
+        this.dateReservation_LocalDate = dateReservation_LocalDate;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                "idReservation=" + idReservation +
-               ", idReservation_Client='" + idReservation_Client +
-               ", idReservation_Services='" + idReservation_Services +
+               ", idClient='" + idClient +
+               ", idService='" + idService +
+               ", dateReservation=" + dateReservation +
                ", statut=" + statut +
                ", modeDePaiement=" + modeDePaiement + 
-               ", dateReservation=" + dateReservation +"}";
+               ", dateReservation_LocalDate=" + dateReservation_LocalDate +"}";
     }
 }
+
+/*
+ * Old Reservation model (SQL-oriented) commented out to switch to JSON minimal model.
+ */

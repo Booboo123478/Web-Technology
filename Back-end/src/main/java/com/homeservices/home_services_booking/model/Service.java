@@ -1,88 +1,34 @@
 package com.homeservices.home_services_booking.model;
 
+import com.homeservices.home_services_booking.dto.DisponibiliteDto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-import com.homeservices.home_services_booking.dto.DisponibiliteDto;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Service {
     private Long idService;
     private Long idPrestataire;
-    private String titre;
+
+    // Informations principales
+    private String titre;          // nom commercial du service
+    private String description;
+    private Double prix;
+
+    // Infos complémentaires héritées de l'ancienne version
     private String metier;
     private String ville;
     private String adresse;
-    private Double prix;
-    private String description;
 
-    private List<DisponibiliteDto> disponibilites;
+    // Champs ajoutés par la version catalogue minimal
+    private String categorie;
+    private String dureeEstimee;   // ex : "1h"
+
+    // Disponibilités et média
+    private List<DisponibiliteDto> disponibilites; // DTO exposé via API future
     private String offreImageUrl;
-
-    // private transient List<Disponibilite> disponibilitesMetier; 
-
-    public Service() {}
-
-    // public Service(Long idService, Long idPrestataire, String titre, String metier, String ville, String adresse,
-    //                Double prix, String description, List<DisponibiliteDto> disponibilites,
-    //                String offreImageUrl, List<Disponibilite> disponibilitesMetier) {
-    //     this.idService = idService;
-    //     this.idPrestataire = idPrestataire;
-    //     this.titre = titre;
-    //     this.metier = metier;
-    //     this.ville = ville;
-    //     this.adresse = adresse;
-    //     this.prix = prix;
-    //     this.description = description;
-    //     this.disponibilites = disponibilites;
-    //     this.offreImageUrl = offreImageUrl;
-    //     this.disponibilitesMetier = disponibilitesMetier;
-    // }
-
-    public Service(Long idService, Long idPrestataire, String titre, String metier, String ville, String adresse,
-                   Double prix, String description, List<DisponibiliteDto> disponibilites,
-                   String offreImageUrl) {
-        this.idService = idService;
-        this.idPrestataire = idPrestataire;
-        this.titre = titre;
-        this.metier = metier;
-        this.ville = ville;
-        this.adresse = adresse;
-        this.prix = prix;
-        this.description = description;
-        this.disponibilites = disponibilites;
-        this.offreImageUrl = offreImageUrl;
-    }
-    // Getters et setters
-
-    public Long getIdService() { return idService; }
-    public void setIdService(Long idService) { this.idService = idService; }
-
-    public Long getIdPrestataire() { return idPrestataire; }
-    public void setIdPrestataire(Long idPrestataire) { this.idPrestataire = idPrestataire; }
-
-    public String getTitre() { return titre; }
-    public void setTitre(String titre) { this.titre = titre; }
-
-    public String getMetier() { return metier; }
-    public void setMetier(String metier) { this.metier = metier; }
-
-    public String getVille() { return ville; }
-    public void setVille(String ville) { this.ville = ville; }
-
-    public String getAdresse() { return adresse; }
-    public void setAdresse(String adresse) { this.adresse = adresse; }
-
-    public Double getPrix() { return prix; }
-    public void setPrix(Double prix) { this.prix = prix; }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
-    public List<DisponibiliteDto> getDisponibilites() { return disponibilites; }
-    public void setDisponibilites(List<DisponibiliteDto> disponibilites) { this.disponibilites = disponibilites; }
-
-    public String getOffreImageUrl() { return offreImageUrl; }
-    public void setOffreImageUrl(String offreImageUrl) { this.offreImageUrl = offreImageUrl; }
-
-    // public List<Disponibilite> getDisponibilitesMetier() { return disponibilitesMetier; }
-    // public void setDisponibilitesMetier(List<Disponibilite> disponibilitesMetier) { this.disponibilitesMetier = disponibilitesMetier; }
 }
