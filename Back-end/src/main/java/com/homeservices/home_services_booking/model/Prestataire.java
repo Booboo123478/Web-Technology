@@ -4,16 +4,18 @@ public class Prestataire {
     private Long idPrestataire;
     private String password;
     private String prestataireMail; 
+    private Long role = 1L;
     private String prestataireName;
     private String description;
 
     // Constructeur vide requis pour la désérialisation JSON
     public Prestataire() {}
 
-    public Prestataire(Long idPrestataire, String password, String prestataireMail, String prestataireName, String description) {
+    public Prestataire(Long idPrestataire, String password, String prestataireMail, Long role, String prestataireName, String description) {
         this.idPrestataire = idPrestataire;
         this.password = password;
         this.prestataireMail = prestataireMail;
+        this.role = role;
         this.prestataireName = prestataireName;
         this.description = description;
     }
@@ -57,5 +59,13 @@ public class Prestataire {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
     }
 }

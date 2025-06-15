@@ -1,5 +1,6 @@
 package com.homeservices.home_services_booking.controller;
 
+import com.homeservices.home_services_booking.dto.LoginRequest;
 import com.homeservices.home_services_booking.model.Prestataire;
 import com.homeservices.home_services_booking.repository.JsonPrestatairesRepository;
 
@@ -15,34 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/prestataires")
 public class PrestataireController {
-
-    // private final JsonPrestatairesRepository repository = null;
-
-    // public PrestataireController(@Value("${app.prestataires.file}") String filePath) {
-    //     this.repository = new JsonPrestatairesRepository(filePath);
-    // }
-
-    // @GetMapping
-    // public ResponseEntity<List<Prestataire>> getAll() {
-    //     return ResponseEntity.ok(repository.findAll());
-    // }
-
-    // @PostMapping("/register")
-    // public ResponseEntity<?> register(@RequestParam String prestataireName,
-    //                                   @RequestParam String password,
-    //                                   @RequestParam Long idPrestataireUser,
-    //                                   @RequestParam String description,
-    //                                   HttpSession session) {
-    //     Long id = repository.getMaxId() + 1;
-    //     Prestataire p = new Prestataire(id, password, idPrestataireUser, prestataireName, description);
-    //     repository.save(p);
-    //     session.setAttribute("prestataire", p);
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(p);
-    // }
-
-    //     public PrestataireController() {
-    //     this.repository = new JsonPrestatairesRepository("/app/Back-end/data/prestataires.json");
-    // }
 
     private final JsonPrestatairesRepository repository;
 
@@ -62,20 +35,23 @@ public class PrestataireController {
         return ResponseEntity.ok(saved);
     }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<?> login(@RequestParam Long idPrestataire,
-    //                                @RequestParam String password,
-    //                                HttpSession session) {
-    //     Optional<Prestataire> optional = repository.findAll().stream()
-    //         .filter(p -> p.getIdPrestataire().equals(idPrestataire) && p.getPassword().equals(password))
-    //         .findFirst();
-    //     if (optional.isPresent()) {
-    //         session.setAttribute("prestataire", optional.get());
-    //         return ResponseEntity.ok(optional.get());
-    //     } else {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
-    //     }
-    // }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
+
+        Optional<Prestataire> prestataire = repository.findAll().stream()
+            .filter(p -> p.getPrestataireMail().equals(email) && p.getPassword().equals(password))
+            .findFirst();
+
+        prestataire.ifPresent(p -> System.out.println("Prestataire trouvé : " + p.getPrestataireMail()));
+        if (prestataire.isPresent()) {
+            session.setAttribute("prestataire", prestataire.get());
+            return ResponseEntity.ok(prestataire.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
+        }
+    }
 
     @GetMapping("/me")
     public ResponseEntity<?> getConnected(HttpSession session) {

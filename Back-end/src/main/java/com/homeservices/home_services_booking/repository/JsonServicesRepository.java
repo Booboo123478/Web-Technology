@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 public class JsonServicesRepository {
 
     private final File jsonFile;
@@ -49,7 +51,7 @@ public class JsonServicesRepository {
 
     public Optional<Service> findByIdService(Long idService) {
         return services.stream()
-                .filter(u -> u.getIdService().equals(idService))
+                .filter(u -> java.util.Objects.equals(u.getIdService(), idService))
                 .findFirst();
     }
 
@@ -60,8 +62,9 @@ public class JsonServicesRepository {
         return service;
     }
 
+    @DeleteMapping("/services/{id}")
     public void delete(Long idService) {
-        services.removeIf(u -> u.getIdService().equals(idService));
+        services.removeIf(u -> java.util.Objects.equals(u.getIdService(), idService));
         saveServicesToFile();
     }
 
@@ -69,5 +72,13 @@ public class JsonServicesRepository {
         return findAll().stream()
             .filter(s -> s.getIdPrestataire().equals(idPrestataire))
             .collect(Collectors.toList());
+    }
+
+    public long getMaxId() {
+        return services.stream()
+                .map(Service::getIdService)
+                .filter(java.util.Objects::nonNull)
+                .max(Long::compareTo)
+                .orElse(0L);
     }
 }

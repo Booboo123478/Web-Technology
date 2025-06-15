@@ -14,16 +14,32 @@ public class Service {
     private Double prix;
     private String description;
 
-    private List<DisponibiliteDto> disponibilites;  // DTO exposé dans l'API
+    private List<DisponibiliteDto> disponibilites;
     private String offreImageUrl;
 
-    private transient List<Disponibilite> disponibilitesMetier; // Usage métier, non sérialisé
+    // private transient List<Disponibilite> disponibilitesMetier; 
 
     public Service() {}
 
+    // public Service(Long idService, Long idPrestataire, String titre, String metier, String ville, String adresse,
+    //                Double prix, String description, List<DisponibiliteDto> disponibilites,
+    //                String offreImageUrl, List<Disponibilite> disponibilitesMetier) {
+    //     this.idService = idService;
+    //     this.idPrestataire = idPrestataire;
+    //     this.titre = titre;
+    //     this.metier = metier;
+    //     this.ville = ville;
+    //     this.adresse = adresse;
+    //     this.prix = prix;
+    //     this.description = description;
+    //     this.disponibilites = disponibilites;
+    //     this.offreImageUrl = offreImageUrl;
+    //     this.disponibilitesMetier = disponibilitesMetier;
+    // }
+
     public Service(Long idService, Long idPrestataire, String titre, String metier, String ville, String adresse,
                    Double prix, String description, List<DisponibiliteDto> disponibilites,
-                   String offreImageUrl, List<Disponibilite> disponibilitesMetier) {
+                   String offreImageUrl) {
         this.idService = idService;
         this.idPrestataire = idPrestataire;
         this.titre = titre;
@@ -34,9 +50,7 @@ public class Service {
         this.description = description;
         this.disponibilites = disponibilites;
         this.offreImageUrl = offreImageUrl;
-        this.disponibilitesMetier = disponibilitesMetier;
     }
-
     // Getters et setters
 
     public Long getIdService() { return idService; }
@@ -69,6 +83,6 @@ public class Service {
     public String getOffreImageUrl() { return offreImageUrl; }
     public void setOffreImageUrl(String offreImageUrl) { this.offreImageUrl = offreImageUrl; }
 
-    public List<Disponibilite> getDisponibilitesMetier() { return disponibilitesMetier; }
-    public void setDisponibilitesMetier(List<Disponibilite> disponibilitesMetier) { this.disponibilitesMetier = disponibilitesMetier; }
+    // public List<Disponibilite> getDisponibilitesMetier() { return disponibilitesMetier; }
+    // public void setDisponibilitesMetier(List<Disponibilite> disponibilitesMetier) { this.disponibilitesMetier = disponibilitesMetier; }
 }

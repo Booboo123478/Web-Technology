@@ -1,1 +1,143 @@
-[]
+[ {
+  "idService" : null,
+  "idPrestataire" : null,
+  "titre" : "TEst",
+  "metier" : "étudiant",
+  "ville" : "Paris",
+  "adresse" : "298 Rue de Vaugirard",
+  "prix" : 0.01,
+  "description" : "aaaa",
+  "disponibilites" : [ {
+    "jour" : "lundi",
+    "matin" : {
+      "debut" : "08:30",
+      "fin" : "12:00"
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mardi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mercredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "jeudi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "vendredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "samedi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  } ],
+  "offreImageUrl" : "/data/image/1ecc8c19-3700-4e1e-b3be-16a742a68090_france.png"
+}, {
+  "idService" : 4,
+  "idPrestataire" : 1,
+  "titre" : "egr",
+  "metier" : "gerge",
+  "ville" : "zef",
+  "adresse" : "fez",
+  "prix" : 0.04,
+  "description" : "azf",
+  "disponibilites" : [ {
+    "jour" : "lundi",
+    "matin" : {
+      "debut" : "10:20",
+      "fin" : "20:00"
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mardi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mercredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "jeudi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "vendredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "samedi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  } ],
+  "offreImageUrl" : "94ad0995-c70e-4045-bb13-036359ef914e_image-anglais.png"
+} ]
