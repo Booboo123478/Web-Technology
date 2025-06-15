@@ -11,10 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.homeservices.home_services_booking.dto.LoginRequest;
 import com.homeservices.home_services_booking.model.User;
 import com.homeservices.home_services_booking.repository.JsonUserRepository;
 
@@ -54,19 +56,18 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String mail,
-                                        @RequestParam String password,
-                                        HttpSession session) {
-        System.out.println("Tentative de connexion : " + mail);
-        Optional<User> optionalUser = userRepository.findAll().stream()
-            .filter(u -> u.getMail().equals(mail) && u.getPassword().equals(password))
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
+
+        Optional<User> user = userRepository.findAll().stream()
+            .filter(u -> u.getMail().equals(email) && u.getPassword().equals(password))
             .findFirst();
-        if (optionalUser.isPresent()) {
-            System.out.println("Connexion réussie pour : " + mail);
-            session.setAttribute("user", optionalUser.get());
-            return ResponseEntity.ok(optionalUser.get());
+
+        if (user.isPresent()) {
+            session.setAttribute("user", user.get());
+            return ResponseEntity.ok(user.get());
         } else {
-            System.out.println("Échec de connexion pour : " + mail);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
         }
     }

@@ -29,3 +29,5 @@ app:
     file: data/reservations.json
   services:
     file: data/services.json
+  image:
+    dir: data/image

@@ -17,6 +17,7 @@ public class JsonPrestatairesRepository {
     public JsonPrestatairesRepository(String filePath) {
         this.file = new File(filePath);
         this.mapper = new ObjectMapper();
+        this.mapper.enable(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT);
         if (!file.exists()) {
             try {
                 mapper.writeValue(file, new ArrayList<Prestataire>());
@@ -36,10 +37,12 @@ public class JsonPrestatairesRepository {
 
     public Prestataire save(Prestataire prestataire) {
         List<Prestataire> prestataires = findAll();
-        prestataires.removeIf(p ->
-            p.getIdPrestataire() != null &&
-            p.getIdPrestataire().equals(prestataire.getIdPrestataire())
-        );
+        if (prestataire.getIdPrestataire() == null) {
+            long newId = getMaxId() + 1;
+            prestataire.setIdPrestataire(newId);
+        } else {
+            prestataires.removeIf(p -> p.getIdPrestataire().equals(prestataire.getIdPrestataire()));
+        }
         prestataires.add(prestataire);
         try {
             mapper.writeValue(file, prestataires);
