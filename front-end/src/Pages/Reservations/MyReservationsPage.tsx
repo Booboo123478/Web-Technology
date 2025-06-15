@@ -52,7 +52,6 @@ const MyReservationsPage: React.FC = () => {
 
   useEffect(()=>{
     if(currentUserId){
-      // preload existing reviews for terminer reservations
       reservations.forEach(r=>{
         if(r.statut==='terminee'){
           const pid=servicesMap[r.idService]?.prestataire;

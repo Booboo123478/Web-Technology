@@ -13,7 +13,7 @@ interface PlageHoraire {
 }
 
 interface Disponibilite {
-  jour: string; // ex: "lundi"
+  jour: string;
   matin: PlageHoraire;
   apresMidi: PlageHoraire;
 }
@@ -51,9 +51,7 @@ function disponibilitesToEvents(
     const jourIndex = joursOrdre.indexOf(dispo.jour.toLowerCase());
     if (jourIndex === -1) return;
 
-    // Calcul décalage entre lundi de la semaine et jour dispo
-    // lundi = 1 dans getDay, ici on veut que lundi soit 0 décalage
-    const decalage = (jourIndex + 6) % 7; // Recalage pour que lundi=0
+    const decalage = (jourIndex + 6) % 7;
 
     const dateJour = new Date(semaineLundi);
     dateJour.setDate(semaineLundi.getDate() + decalage);
@@ -113,7 +111,7 @@ const ServiceDetails: React.FC = () => {
         return res.json();
       })
       .then((data: ServiceDetail) => {
-      console.log('Data reçue:', data);  // <--- Ici
+      console.log('Data reçue:', data);
       if (!data || Object.keys(data).length === 0) {
         console.log('Service vide ou inexistant');
         setService(null);
@@ -127,10 +125,8 @@ const ServiceDetails: React.FC = () => {
       .finally(() => setLoading(false));
     }, [id]);
 
-
-  // Obtenir lundi de la semaine en cours
   const getMonday = (date: Date): Date => {
-    const day = date.getDay() || 7; // dimanche=7
+    const day = date.getDay() || 7;
     const diff = 1 - day;
     const monday = new Date(date);
     monday.setDate(date.getDate() + diff);

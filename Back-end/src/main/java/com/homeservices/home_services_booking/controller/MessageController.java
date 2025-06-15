@@ -3,7 +3,6 @@ package com.homeservices.home_services_booking.controller;
 import com.homeservices.home_services_booking.model.Message;
 import com.homeservices.home_services_booking.model.User;
 import com.homeservices.home_services_booking.repository.JsonMessageRepository;
-import com.homeservices.home_services_booking.repository.JsonUserRepository;
 
 import jakarta.servlet.http.HttpSession;
 

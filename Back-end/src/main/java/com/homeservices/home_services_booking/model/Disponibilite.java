@@ -9,11 +9,9 @@ import java.util.Map;
 
 public class Disponibilite {
 
-    // Pour chaque jour, une liste de plages horaires (ex : matin + après-midi)
     private Map<DayOfWeek, List<PlageHoraire>> disponibilites = new EnumMap<>(DayOfWeek.class);
 
     public Disponibilite() {
-        // Initialiser les listes vides pour chaque jour (optionnel)
         for (DayOfWeek day : DayOfWeek.values()) {
             disponibilites.put(day, new ArrayList<>());
         }

@@ -49,7 +49,6 @@ const AjouterService: React.FC = () => {
 
   const [message, setMessage] = useState('');
 
-  // Gestion des champs texte et nombre
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -58,7 +57,6 @@ const AjouterService: React.FC = () => {
     }));
   };
 
-  // Gestion des horaires dans les disponibilités
   const handleHoraireChange = (
     index: number,
     periode: 'matin' | 'apresMidi',
@@ -74,7 +72,6 @@ const AjouterService: React.FC = () => {
     setFormData(prev => ({ ...prev, disponibilites: newDispos }));
   };
 
-  // Gestion upload fichier image
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFormData(prev => ({ ...prev, offreImageFile: e.target.files![0] }));

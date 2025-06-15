@@ -18,7 +18,6 @@ const RechercheServices: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [filtered, setFiltered] = useState<Service[]>([]);
 
-  // Filtres
   const [metier, setMetier] = useState('');
   const [ville, setVille] = useState('');
   const [prixMin, setPrixMin] = useState('');

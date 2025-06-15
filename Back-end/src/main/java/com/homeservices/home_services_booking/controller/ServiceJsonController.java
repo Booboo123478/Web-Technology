@@ -47,7 +47,6 @@ public class ServiceJsonController {
             long newId = serviceRepository.getMaxId() + 1;
             service.setIdService(newId);
 
-            // Save image if provided
             if (file != null && !file.isEmpty()) {
                 String filename = "service_" + newId + "_" + file.getOriginalFilename();
                 java.nio.file.Path dirPath = java.nio.file.Paths.get(imagesDir);
@@ -57,7 +56,6 @@ public class ServiceJsonController {
                 java.nio.file.Files.createDirectories(dirPath);
                 java.nio.file.Path target = dirPath.resolve(filename);
                 file.transferTo(target.toFile());
-                // URL exposée côté front – on garde /image/filename
                 service.setOffreImageUrl(filename);
             }
 

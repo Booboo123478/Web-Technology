@@ -23,7 +23,6 @@ const MesDemandes: React.FC = () => {
     const fetchData=async()=>{
       const res=await axios.get(`/api/reservations/prestataire/${idPrestataire}?statut=en_attente`);
       const reservations:Reservation[]=res.data;
-      // load services and users maps
       const servicesRes=await axios.get('/api/services');
       const servicesMap:Record<number,string>={};
       servicesRes.data.forEach((s:any)=>servicesMap[s.idService]=s.titre||s.nomService);

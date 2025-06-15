@@ -24,12 +24,10 @@ const Messaging: React.FC = () => {
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
-        // Fetch current user
         axios.get<User>('/api/users/me')
             .then(response => setCurrentUser(response.data))
             .catch(error => console.error("Error fetching current user:", error));
 
-        // Fetch all users to create conversations list
         axios.get<User[]>('/api/users')
             .then(response => setUsers(response.data))
             .catch(error => console.error("Error fetching users:", error));

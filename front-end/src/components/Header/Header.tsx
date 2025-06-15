@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Header.css';
 
 const Header: React.FC = () => {
-  /* null = rôle pas encore connu, true = prestataire, false = client */
   const [isPrestataire, setIsPrestataire] = useState<boolean | null>(null);
 
   
@@ -12,9 +11,9 @@ const Header: React.FC = () => {
       .then(data => {
         if (data.type === 'prestataire') setIsPrestataire(true);
         else if (data.type === 'user')   setIsPrestataire(false);
-        else                             setIsPrestataire(false);   // valeur par défaut
+        else                             setIsPrestataire(false);
       })
-      .catch(() => setIsPrestataire(false)); // silence en cas d’erreur réseau
+      .catch(() => setIsPrestataire(false));
   }, []);
 
   

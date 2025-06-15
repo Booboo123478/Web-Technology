@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor; // Génère le constructeur avec tous les arguments
-import lombok.Data;  // Génère tous les getters, setters, equals, hashCode et toString
-import lombok.NoArgsConstructor; // Génère le constructeur sans arguments
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

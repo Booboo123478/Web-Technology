@@ -14,21 +14,17 @@ public class Service {
     private Long idService;
     private Long idPrestataire;
 
-    // Informations principales
-    private String titre;          // nom commercial du service
+    private String titre;
     private String description;
     private Double prix;
 
-    // Infos complémentaires héritées de l'ancienne version
     private String metier;
     private String ville;
     private String adresse;
 
-    // Champs ajoutés par la version catalogue minimal
     private String categorie;
-    private String dureeEstimee;   // ex : "1h"
+    private String dureeEstimee;
 
-    // Disponibilités et média
-    private List<DisponibiliteDto> disponibilites; // DTO exposé via API future
+    private List<DisponibiliteDto> disponibilites;
     private String offreImageUrl;
 }

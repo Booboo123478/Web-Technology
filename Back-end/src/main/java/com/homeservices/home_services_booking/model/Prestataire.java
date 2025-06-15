@@ -8,7 +8,6 @@ public class Prestataire {
     private String prestataireName;
     private String description;
 
-    // Constructeur vide requis pour la désérialisation JSON
     public Prestataire() {}
 
     public Prestataire(Long idPrestataire, String password, String prestataireMail, String prestataireName, String description) {
@@ -20,7 +19,6 @@ public class Prestataire {
         this.description = description;
     }
 
-    // Getters et setters
     public Long getIdPrestataire() {
         return idPrestataire;
     }

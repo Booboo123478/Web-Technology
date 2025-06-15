@@ -6,11 +6,11 @@ const Footer: React.FC = () => {
     try {
       const response = await fetch('/api/users/logout', {
         method: 'POST',
-        credentials: 'include', // ensures cookies/session are sent
+        credentials: 'include',
       });
 
       if (response.ok) {
-        window.location.href = '/login'; // redirect to login after logout
+        window.location.href = '/login';
       } else {
         console.error('Erreur de déconnexion');
       }

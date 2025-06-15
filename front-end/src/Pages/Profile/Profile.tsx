@@ -26,7 +26,6 @@ function mapBackendUserToProfile(user: any): Profile {
     2: 'admin',
   };
 
-  // Détection structure prestataire vs client
   const isPrestataire = user.hasOwnProperty('idPrestataire');
 
   return {
@@ -86,8 +85,6 @@ const ProfilePage: React.FC = () => {
             <ProfileCard profile={currentUser} isOwnProfile={true} />
             <div className="avis-section">
               <AvisList idPrestataire={currentUser.idUser} refreshTrigger={refreshTrigger} />
-              {/* Le formulaire d'avis ne doit pas s'afficher sur sa propre page de profil.
-                  Il ne s'affichera que sur les pages de profil publiques d'autres utilisateurs. */}
             </div>
           </>
         ) : (

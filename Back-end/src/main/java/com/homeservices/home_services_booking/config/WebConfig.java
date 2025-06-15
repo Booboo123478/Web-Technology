@@ -21,7 +21,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Expose images directory so frontend can access via /image/filename
         String location = "file:" + (imagesDir.endsWith("/") ? imagesDir : imagesDir + "/");
         registry.addResourceHandler("/image/**")
                 .addResourceLocations(location);

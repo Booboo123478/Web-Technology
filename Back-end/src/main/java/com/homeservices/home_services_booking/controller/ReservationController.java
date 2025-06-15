@@ -7,7 +7,6 @@ import com.homeservices.home_services_booking.repository.JsonServiceRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,6 @@ public class ReservationController {
         this.serviceRepository = serviceRepository;
     }
 
-    // Créer une réservation : idService et date (yyyy-MM-dd) dans le body x-www-form-urlencoded
     @PostMapping
     public ResponseEntity<ReservationSimple> create(@RequestParam long idClient,
                                                     @RequestParam long idService,
@@ -37,14 +35,12 @@ public class ReservationController {
         return ResponseEntity.ok(reservationRepository.save(r));
     }
 
-    // Lister les réservations – possibilité de filtrer par client
     @GetMapping
     public List<ReservationSimple> list(@RequestParam(required = false) Long clientId) {
         if (clientId == null) return reservationRepository.findAll();
         return reservationRepository.findByClient(clientId);
     }
 
-    // Changer le statut
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> changeStatus(@PathVariable long id, @RequestParam String value) {
         ReservationSimple r = reservationRepository.findById(id);
@@ -54,7 +50,6 @@ public class ReservationController {
         return ResponseEntity.ok(r);
     }
 
-    // Réservations des services d'un prestataire
     @GetMapping("/prestataire/{id}")
     public List<ReservationSimple> listByPrestataire(@PathVariable long id,
                                                      @RequestParam(required = false) String statut) {

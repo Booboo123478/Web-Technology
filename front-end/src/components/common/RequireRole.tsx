@@ -8,11 +8,9 @@ type RequireRoleProps = {
 
 const RequireRole: React.FC<RequireRoleProps> = ({ allowedRoles, userRole }) => {
   if (userRole === null) {
-    // pas connecté
     return <Navigate to="/login" replace />;
   }
   if (!allowedRoles.includes(userRole)) {
-    // pas autorisé
     return <Navigate to="/home" replace />;
   }
   return <Outlet />;

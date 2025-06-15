@@ -70,7 +70,6 @@ const InscriptionPrestataire: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Préparer FormData
     const payload = {
         prestataireName: formData.prestataireName,
         metier: formData.metier,
@@ -90,7 +89,6 @@ const InscriptionPrestataire: React.FC = () => {
         });
       if (res.ok) {
         setMessage('Inscription réussie');
-        // reset formulaire ici si besoin
       } else {
         setMessage('Erreur serveur');
       }
@@ -109,7 +107,7 @@ const InscriptionPrestataire: React.FC = () => {
     const currentPeriode = newDispos[index][periode] ?? { debut: null, fin: null };
     newDispos[index][periode] = {
       ...currentPeriode,
-      [champ]: value || null, // vide = null
+      [champ]: value || null,
     };
     setFormData((prev) => ({ ...prev, disponibilites: newDispos }));
   };

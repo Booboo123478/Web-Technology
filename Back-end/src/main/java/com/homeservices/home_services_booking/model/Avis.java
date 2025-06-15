@@ -14,7 +14,7 @@ public class Avis {
     private long idAvis;
     private long idClient;
     private long idPrestataire;
-    private int note; // 1 à 5
+    private int note;
     private String commentaire;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAvis;

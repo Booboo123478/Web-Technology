@@ -28,17 +28,11 @@ public class PrestataireController {
         this.userRepository = new JsonUserRepository(userFilePath);
     }
 
-    /* =========================
-       LISTE DES PRESTATAIRES
-       ========================= */
     @GetMapping
     public List<Prestataire> getAll() {
         return repository.findAll();
     }
 
-    /* =========================
-       INSCRIPTION PRESTATAIRE
-       ========================= */
     @PostMapping("/register")
 public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userName,
                                                      @RequestParam String password,
@@ -48,24 +42,18 @@ public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userNa
 
     long newId = Math.max(repository.getMaxId(), userRepository.getMaxId()) + 1;
 
-    // 1. Enregistrer dans users.json (rôle 1 = prestataire)
     User newUser = new User(newId, userName, password, email, 1L, LocalDate.now());
     userRepository.save(newUser);
 
-    // 2. Enregistrer dans prestataires.json
     Prestataire prestataire = new Prestataire(newId, password, email, userName, description);
     Prestataire saved       = repository.save(prestataire);
 
-    // 3. Mettre en session pour connecter immédiatement
     session.setAttribute("user",       newUser);
     session.setAttribute("prestataire", saved);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 }
 
-    /* =========================
-       CONNEXION PRESTATAIRE
-       ========================= */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest,
                                    HttpSession session) {
@@ -86,9 +74,6 @@ public ResponseEntity<Prestataire> createPrestataire(@RequestParam String userNa
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
     }
 
-    /* =========================
-       PROFIL CONNECTÉ
-       ========================= */
     @GetMapping("/me")
     public ResponseEntity<?> getConnected(HttpSession session) {
         Prestataire prestataire = (Prestataire) session.getAttribute("prestataire");

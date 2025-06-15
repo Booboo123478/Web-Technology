@@ -34,7 +34,7 @@ const AvisForm: React.FC<AvisFormProps> = ({ idPrestataire, onAvisSubmit }) => {
             setSuccess('Votre avis a été soumis avec succès !');
             setNote(0);
             setCommentaire('');
-            onAvisSubmit(); // Callback to refresh the list
+            onAvisSubmit();
         })
         .catch(err => {
             setError('Erreur lors de la soumission de l\'avis.');

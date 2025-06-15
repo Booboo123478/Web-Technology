@@ -1,4 +1,4 @@
-/*package com.homeservices.home_services_booking.controller;
+package com.homeservices.home_services_booking.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,21 +30,11 @@ import com.homeservices.home_services_booking.repository.JsonServicesRepository;
 @RequestMapping("/api/services")
 public class ServiceController {
 
-    // private final JsonServicesRepository repository;
-
-    // public ServiceController() {
-    //     this.repository = new JsonServicesRepository("data/services.json");
-    // }
-
     private final JsonServicesRepository repository;
-    private final String imagesDir;
 
-    public ServiceController(
-            @Value("${app.services.file}") String servicesFilePath,
-            @Value("${app.image.dir}") String imagesDir) {
-        System.out.println("ServiceController créé avec servicesFilePath=" + servicesFilePath + " et imagesDir=" + imagesDir);
+    public ServiceController(@Value("${app.services.file}") String servicesFilePath) {
+        System.out.println("ServiceController créé avec servicesFilePath=" + servicesFilePath);
         this.repository = new JsonServicesRepository(servicesFilePath);
-        this.imagesDir = imagesDir;
             }
 
     @GetMapping
@@ -66,32 +56,9 @@ public class ServiceController {
             ObjectMapper mapper = new ObjectMapper();
             Service service = mapper.readValue(serviceJson, Service.class);
 
-            // if (offreImage != null && !offreImage.isEmpty()) {
-            //     String filename = UUID.randomUUID() + "_" + Path.of(offreImage.getOriginalFilename()).getFileName();
-
-            //     // Si imagesDir vaut "data/image"
-            //     File dossier = new File(imagesDir);
-            //     File dossierAbsolu = dossier.getAbsoluteFile(); // converti en absolu
-            //     System.out.println("Chemin absolu du dossier image : " + dossierAbsolu.getAbsolutePath());
-
-            //     if (!dossierAbsolu.exists()) {
-            //         boolean created = dossierAbsolu.mkdirs();
-            //         if (!created) {
-            //             throw new IOException("Impossible de créer le dossier : " + dossierAbsolu.getAbsolutePath());
-            //         }
-            //     }
-
-            //     File fichierImage = new File(dossierAbsolu, filename);
-
-            //     offreImage.transferTo(fichierImage);
-            //     service.setOffreImageUrl("/" + imagesDir + "/" + filename);
-            // }
-
             if (offreImage != null && !offreImage.isEmpty()) {
-            // Génère un nom de fichier unique + extension
             String filename = UUID.randomUUID() + "_" + Path.of(offreImage.getOriginalFilename()).getFileName();
 
-            // Chemin relatif vers dossier image front-end public/image
             String imagesDir2 = "../front-end/public/image";
 
             File dossier = new File(imagesDir2);
@@ -106,13 +73,10 @@ public class ServiceController {
 
             File fichierImage = new File(dossierAbsolu, filename);
 
-            // Sauvegarde le fichier physiquement
             offreImage.transferTo(fichierImage);
 
-            // Sauvegarde uniquement le nom du fichier dans ta DB (par exemple)
             service.setOffreImageUrl(filename);
-        }
-            
+        }            
             long newId = repository.getMaxId() + 1;
             service.setIdService(newId);
 
@@ -152,5 +116,3 @@ public class ServiceController {
         }
     }
 }
-
- */

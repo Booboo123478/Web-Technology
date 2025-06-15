@@ -30,7 +30,6 @@ const ServicesPage: React.FC = () => {
   const createReservation = (idService: number) => {
     if (!selectedDate) { setFeedback('Choisissez une date.'); return; }
     if (!selectedTime) { setFeedback('Choisissez une heure.'); return; }
-    // Récupère l'utilisateur connecté pour obtenir l'idClient
     axios.get('/api/users/me')
       .then(res => {
         const idClient = res.data.idUser;

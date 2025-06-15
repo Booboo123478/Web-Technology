@@ -3,16 +3,11 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://db:5432/db
     username: postgres
-    #password: myNotSoSecretPassword
     password: ${POSTGRES_PASSWORD}
 
   jpa:
     show-sql: true
-    # hibernate:
-    #   ddl-auto: update  
-    # properties:
-    #   hibernate:
-    #     format_sql: true  
+
 
 app:
   users:

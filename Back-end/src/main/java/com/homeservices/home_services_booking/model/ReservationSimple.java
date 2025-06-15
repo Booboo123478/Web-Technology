@@ -11,6 +11,6 @@ public class ReservationSimple {
     private long idReservation;
     private long idClient;
     private long idService;
-    private String dateReservation; // yyyy-MM-dd
-    private String statut; // attente | confirmee | terminee
+    private String dateReservation;
+    private String statut;
 } 

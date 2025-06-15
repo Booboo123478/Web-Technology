@@ -32,7 +32,7 @@ public class DisponibiliteDto {
     }
 
     public static class Heure {
-        private String debut; // format "HH:mm"
+        private String debut;
         private String fin;
 
         public Heure() {}
