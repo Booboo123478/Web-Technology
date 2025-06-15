@@ -11,7 +11,8 @@ Back-end/data/prestataires.json
 Back-end/data/reservations.json
 Back-end/data/services.json
 Back-end/data/users.json
-
+Back-end/data/
+Front-end/public/image
 
 ### STS ###
 .apt_generated
