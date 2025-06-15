@@ -1,4 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import InputField from '../../components/common/InputField';
+import Button from '../../components/common/Button/Button';
 
 interface PeriodeHoraire {
   debut: string | null;
@@ -114,111 +118,90 @@ const AjouterService: React.FC = () => {
     };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <input
-        type="text"
-        name="titre"
-        placeholder="Titre du service"
-        value={formData.titre}
-        onChange={handleChange}
-        required
-      />
+    <>
+      <Header />
+      <form onSubmit={handleSubmit} encType="multipart/form-data" style={{ padding: '2rem', maxWidth: '600px', margin: '15vh auto' }}>
+        <InputField label="Titre du service" placeholder="Titre du service" name="titre" value={formData.titre} onChange={handleChange} type="text" />
+        <InputField label="Métier" placeholder="Métier (ex: Plombier)" name="metier" value={formData.metier} onChange={handleChange} type="text" />
+        <InputField label="Ville" placeholder="Ville" name="ville" value={formData.ville} onChange={handleChange} type="text" />
+        <InputField label="Adresse" placeholder="Adresse" name="adresse" value={formData.adresse} onChange={handleChange} type="text" />
+        <InputField label="Prix" placeholder="Prix" name="prix" value={formData.prix.toString()} onChange={handleChange} type="number" />
+        <InputField label="Description" placeholder="Description du service" name="description" value={formData.description} onChange={handleChange} type="textArea" />
 
-      <input
-        type="text"
-        name="metier"
-        placeholder="Métier (ex: Plombier)"
-        value={formData.metier}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="text"
-        name="ville"
-        placeholder="Ville"
-        value={formData.ville}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="text"
-        name="adresse"
-        placeholder="Adresse"
-        value={formData.adresse}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="number"
-        name="prix"
-        placeholder="Prix"
-        min={0}
-        step={0.01}
-        value={formData.prix}
-        onChange={handleChange}
-        required
-      />
-
-      <textarea
-        name="description"
-        placeholder="Description du service"
-        value={formData.description}
-        onChange={handleChange}
-      />
-
-      <fieldset>
-        <legend>Disponibilités (heures)</legend>
-        {formData.disponibilites.map((d, i) => (
-          <div key={d.jour} style={{ marginBottom: '1rem' }}>
-            <strong>{d.jour.charAt(0).toUpperCase() + d.jour.slice(1)}</strong>
-
-            <div>
-              <label>Matin :</label>
-              <input
-                type="time"
-                value={d.matin?.debut || ''}
-                onChange={e => handleHoraireChange(i, 'matin', 'debut', e.target.value)}
-              />
-              {' - '}
-              <input
-                type="time"
-                value={d.matin?.fin || ''}
-                onChange={e => handleHoraireChange(i, 'matin', 'fin', e.target.value)}
-              />
-              {(!d.matin?.debut && !d.matin?.fin) && <em> (indisponible)</em>}
+        <fieldset style = {{marginBottom: '2vh'}}>
+          <legend>Disponibilités (heures)</legend>
+          {formData.disponibilites.map((d, i) => (
+            <div key={d.jour} style={{ marginBottom: '1rem' }}>
+              <strong style={{ textDecoration: 'underline' }}>{d.jour.charAt(0).toUpperCase() + d.jour.slice(1)}</strong>
+              <div style={{ display: 'flex', gap: '4vw' }}>
+                <div>
+              <p>Matin</p>
+              <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
+                <InputField
+                  label="De "
+                  name={`matin-${i}-debut`}
+                  type="time"
+                  value={d.matin?.debut || ''}
+                  onChange={e => handleHoraireChange(i, 'matin', 'debut', e.target.value)}
+                /> 
+                {' - '}
+                <InputField
+                  label="À "
+                  name={`matin-${i}-fin`}
+                  type="time"
+                  value={d.matin?.fin || ''}
+                  onChange={e => handleHoraireChange(i, 'matin', 'fin', e.target.value)}
+                />
+                
+                </div>
+                {(!d.matin?.debut && !d.matin?.fin) && <em> (indisponible)</em>}
+                </div>
+                <div>
+                <p>Après-midi </p>
+                <div style = {{ display: 'flex', gap: '1rem' }}>
+                <InputField
+                  label="De "
+                  name={`apresMidi-${i}-debut`}
+                  type="time"
+                  value={d.apresMidi?.debut || ''}
+                  onChange={e => handleHoraireChange(i, 'apresMidi', 'debut', e.target.value)}
+                />
+                {' - '}
+                <InputField
+                  label="À "
+                  name={`apresMidi-${i}-fin`}
+                  type="time"
+                  value={d.apresMidi?.fin || ''}
+                  onChange={e => handleHoraireChange(i, 'apresMidi', 'fin', e.target.value)} />
+                  </div>
+                {(!d.apresMidi?.debut && !d.apresMidi?.fin) && <em> (indisponible)</em>}
+              
+              </div>
             </div>
-
-            <div>
-              <label>Après-midi :</label>
-              <input
-                type="time"
-                value={d.apresMidi?.debut || ''}
-                onChange={e => handleHoraireChange(i, 'apresMidi', 'debut', e.target.value)}
-              />
-              {' - '}
-              <input
-                type="time"
-                value={d.apresMidi?.fin || ''}
-                onChange={e => handleHoraireChange(i, 'apresMidi', 'fin', e.target.value)}
-              />
-              {(!d.apresMidi?.debut && !d.apresMidi?.fin) && <em> (indisponible)</em>}
-            </div>
+        <div
+          className='divider'
+          style={{
+            height: '1px',
+            width: '100%',
+            backgroundColor: '#2dd4beac',
+            margin: '40px 0px 40px 0px'
+          }}
+        ></div>
           </div>
-        ))}
-      </fieldset>
+          ))}
+        </fieldset>
 
-      <div>
-        <label>Image du service :</label>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-      </div>
+        <div style={{ marginBottom: '2vh' }}>
+          <label>Image du service :</label>
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+        </div>
 
-      <button type="submit">Ajouter le service</button>
+        <Button text={'Ajouter le service'} type='submit' />
 
-      {message && <p>{message}</p>}
-    </form>
+        {message && <p>{message}</p>}
+      </form>
+      <Footer />
+    </>
   );
 };
 

@@ -4,6 +4,8 @@ import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { useParams } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 interface PlageHoraire {
   debut: string | null;
@@ -147,6 +149,7 @@ const ServiceDetails: React.FC = () => {
   if (!service) return <p>Service non trouvé.</p>;
 
   return (
+    <><Header />
     <div>
       <h2>Détails du service</h2>
       <img
@@ -185,6 +188,8 @@ const ServiceDetails: React.FC = () => {
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 

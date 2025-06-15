@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import InputField from '../../components/common/InputField';
 
 interface Service {
   idService: number;
@@ -52,34 +55,16 @@ const RechercheServices: React.FC = () => {
   }, [metier, ville, prixMin, prixMax, services]);
 
   return (
-    <div>
+    <><Header />
+    <div style={{ padding: '2rem', maxWidth: '100vw', margin: '10vh auto' }}>
       <h2>Rechercher un service</h2>
 
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        <input
-          type="text"
-          placeholder="Métier"
-          value={metier}
-          onChange={e => setMetier(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Ville"
-          value={ville}
-          onChange={e => setVille(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Prix min"
-          value={prixMin}
-          onChange={e => setPrixMin(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Prix max"
-          value={prixMax}
-          onChange={e => setPrixMax(e.target.value)}
-        />
+        <InputField label="Métier" placeholder="Métier" value={metier} onChange={e => setMetier(e.target.value)} type="text" />
+        <InputField label="Ville" placeholder="Ville" value={ville} onChange={e => setVille(e.target.value)} type="text" />
+        <InputField label="Prix min" placeholder="Prix min" value={prixMin} onChange={e => setPrixMin(e.target.value)} type="number" />
+        <InputField label="Prix max" placeholder="Prix max" value={prixMax} onChange={e => setPrixMax(e.target.value)} type="number" />
+
       </div>
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -112,6 +97,8 @@ const RechercheServices: React.FC = () => {
 
       {filtered.length === 0 && <p>Aucun service ne correspond à votre recherche.</p>}
     </div>
+    <Footer />
+    </>
   );
 };
 

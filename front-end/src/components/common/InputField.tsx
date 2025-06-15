@@ -6,12 +6,13 @@ interface Props {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  placeholder?: string;
 }
 
-const InputField: React.FC<Props> = ({ label, type, value, onChange, name }) => (
+const InputField: React.FC<Props> = ({ label, type, value, onChange, name, placeholder }) => (
   <div className="input-group">
     <label>{label}</label>
-    <input type={type} value={value} onChange={onChange} name={name} required />
+    <input type={type} value={value} onChange={onChange} name={name} required placeholder={placeholder} />
   </div>
 );
 
