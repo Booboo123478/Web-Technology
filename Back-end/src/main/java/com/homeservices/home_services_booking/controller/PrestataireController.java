@@ -37,7 +37,7 @@ public class PrestataireController {
         System.out.println("Prestataire reçu : " + userName + " email : " + email);
         
         long newId = repository.getMaxId() +1;
-        Prestataire prestataire = new Prestataire(newId, password,email, userName, description);
+        Prestataire prestataire = new Prestataire(newId, password, email, 1L, userName, description);
 
         Prestataire saved = repository.save(prestataire);
         return ResponseEntity.ok(saved);

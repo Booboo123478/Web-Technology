@@ -15,7 +15,7 @@ public class Prestataire {
         this.idPrestataire = idPrestataire;
         this.password = password;
         this.prestataireMail = prestataireMail;
-        this.role = role;
+        this.role = 1L;
         this.prestataireName = prestataireName;
         this.description = description;
     }
