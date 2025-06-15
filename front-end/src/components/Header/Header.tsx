@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.css';
 
 const Header: React.FC = () => {
+
+  const [isPrestataire, setIsPrestataire] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch('/api/session', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+        if (data.type === 'prestataire') {
+          setIsPrestataire(true);
+        } else if (data.type === 'user') {
+          setIsPrestataire(false);
+        }
+      });
+  }, []);
+
+  if (isPrestataire === null) return null;
+
+  const servicesLink = isPrestataire ? '/mes-services' : '/recherche-services';
+
   return (
     <div className="navbar">
       <div className="logo"><a href='/home'>LOGO</a></div>
       <div className="footer-section links">
-        <a href="/services">Services</a>
+        <a href={servicesLink}>Services</a>
         <a href="/...">...</a>
         <a href="/...">...</a>
       </div>

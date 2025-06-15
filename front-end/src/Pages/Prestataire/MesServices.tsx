@@ -38,7 +38,6 @@ const MesServices: React.FC<MesServicesProps> = ({ idPrestataire }) => {
 
   if (!idPrestataire) return <p>Identifiant prestataire non fourni.</p>;
   if (loading) return <p>Chargement...</p>;
-  if (services.length === 0) return <p>Aucun service trouvé.</p>;
 
   const handleDelete = async (id: number) => {
     if (!window.confirm("Voulez-vous vraiment supprimer ce service ?")) return;

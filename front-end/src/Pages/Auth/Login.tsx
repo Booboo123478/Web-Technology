@@ -106,7 +106,7 @@ const Login: React.FC = () => {
           {userType === 'client' ? (
             <a href="/register">Inscription client</a>
           ) : (
-            <a href="/register-prestataire">Inscription prestataire</a>
+            <a href="/inscription-prestataire">Inscription prestataire</a>
           )}
         </p>
       </form>

@@ -40,6 +40,9 @@ public class PrestataireController {
         Prestataire prestataire = new Prestataire(newId, password, email, 1L, userName, description);
 
         Prestataire saved = repository.save(prestataire);
+
+        session.setAttribute("prestataire",prestataire);
+
         return ResponseEntity.ok(saved);
     }
 

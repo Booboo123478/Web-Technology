@@ -221,4 +221,85 @@
     }
   } ],
   "offreImageUrl" : "53304dd4-0497-49b0-b44f-a7c21a965109_france.png"
+}, {
+  "idService" : 6,
+  "idPrestataire" : 4,
+  "titre" : "Reparation evier",
+  "metier" : "Plomberie",
+  "ville" : "Asnières-sur-Seine",
+  "adresse" : "55 rue Maurice Boknanowski",
+  "prix" : 25.15,
+  "description" : "",
+  "disponibilites" : [ {
+    "jour" : "lundi",
+    "matin" : {
+      "debut" : "10:05",
+      "fin" : "11:15"
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mardi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mercredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "jeudi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "vendredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "samedi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "dimanche",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  } ],
+  "offreImageUrl" : null
 } ]

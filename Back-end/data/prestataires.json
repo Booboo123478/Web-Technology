@@ -19,4 +19,11 @@
   "role" : 1,
   "prestataireName" : "Marc-Antoine TISSOT",
   "description" : "aaa"
+}, {
+  "idPrestataire" : 4,
+  "password" : "123456",
+  "prestataireMail" : "etco61349@eleve.isep.fr",
+  "role" : 1,
+  "prestataireName" : "Etienne",
+  "description" : ""
 } ]
