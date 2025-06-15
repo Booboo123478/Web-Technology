@@ -40,7 +40,6 @@ public class AvisController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client non connecté");
         }
 
-        // Validation de la réservation terminée
         boolean ok = reservationRepository.findByClient(client.getIdUser()).stream()
                 .filter(r -> r.getStatut().equals("terminee"))
                 .anyMatch(r -> {

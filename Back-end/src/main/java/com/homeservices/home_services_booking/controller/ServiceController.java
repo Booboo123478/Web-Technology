@@ -14,14 +14,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/services")
-public class ServiceJsonController {
+public class ServiceController {
 
     private final JsonServiceRepository serviceRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Value("${app.image.dir:data/image}")
     private String imagesDir;
 
-    public ServiceJsonController(JsonServiceRepository serviceRepository) {
+    public ServiceController(JsonServiceRepository serviceRepository) {
         this.serviceRepository = serviceRepository;
     }
 
