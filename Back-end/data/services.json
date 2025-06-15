@@ -140,4 +140,85 @@
     }
   } ],
   "offreImageUrl" : "94ad0995-c70e-4045-bb13-036359ef914e_image-anglais.png"
+}, {
+  "idService" : 5,
+  "idPrestataire" : 1,
+  "titre" : "her",
+  "metier" : "her",
+  "ville" : "erh",
+  "adresse" : "hre",
+  "prix" : 12.0,
+  "description" : "ger",
+  "disponibilites" : [ {
+    "jour" : "lundi",
+    "matin" : {
+      "debut" : "08:00",
+      "fin" : "12:00"
+    },
+    "apresMidi" : {
+      "debut" : "14:00",
+      "fin" : "18:00"
+    }
+  }, {
+    "jour" : "mardi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "mercredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "jeudi",
+    "matin" : {
+      "debut" : "09:00",
+      "fin" : "12:00"
+    },
+    "apresMidi" : {
+      "debut" : "13:00",
+      "fin" : "18:00"
+    }
+  }, {
+    "jour" : "vendredi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "samedi",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  }, {
+    "jour" : "dimanche",
+    "matin" : {
+      "debut" : null,
+      "fin" : null
+    },
+    "apresMidi" : {
+      "debut" : null,
+      "fin" : null
+    }
+  } ],
+  "offreImageUrl" : "53304dd4-0497-49b0-b44f-a7c21a965109_france.png"
 } ]

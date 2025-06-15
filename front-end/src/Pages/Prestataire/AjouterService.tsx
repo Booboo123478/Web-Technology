@@ -11,7 +11,7 @@ interface DisponibiliteDto {
   apresMidi: PeriodeHoraire | null;
 }
 
-const jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+const jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
 
 const dispoInitiales: DisponibiliteDto[] = jours.map(jour => ({
   jour,

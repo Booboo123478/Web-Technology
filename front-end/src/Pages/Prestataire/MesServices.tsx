@@ -12,7 +12,6 @@ interface Service {
 interface MesServicesProps {
   idPrestataire?: number;
 }
-const backendBaseUrl = "http://localhost:8080";
 
 const MesServices: React.FC<MesServicesProps> = ({ idPrestataire }) => {
   const [services, setServices] = useState<Service[]>([]);

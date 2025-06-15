@@ -11,6 +11,8 @@ import Messaging from './Pages/Messaging/Messaging';
 import RequireRole from './components/common/RequireRole';
 import MesServices from './Pages/Prestataire/MesServices';
 import AjouterService from './Pages/Prestataire/AjouterService';
+import RechercheServices from './Pages/User/RechercheServices';
+import ServiceDetails from './Pages/User/ServiceDetails';
 
 
   function App() {
@@ -35,6 +37,8 @@ import AjouterService from './Pages/Prestataire/AjouterService';
           <Route path='/CGU' element={<Terms />} />
           <Route path='/politique-de-confidentialite' element={<Privacy />} />
           <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
+          <Route path="/recherche-services" element={<RechercheServices />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
 
           {<Route element={<RequireRole allowedRoles={[1]} userRole={userRole} />}>
             <Route

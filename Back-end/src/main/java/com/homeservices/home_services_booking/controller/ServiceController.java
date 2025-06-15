@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -141,4 +142,13 @@ public class ServiceController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Service> getServiceById(@PathVariable Long id) {
+        Optional<Service> serviceOpt = repository.findByIdService(id);
+        if (serviceOpt.isPresent()) {
+            return ResponseEntity.ok(serviceOpt.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
