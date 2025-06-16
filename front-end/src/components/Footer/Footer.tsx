@@ -30,7 +30,6 @@ const Footer: React.FC = () => {
       <div className="footer-section links">
         <a href="/cgu">CGU</a>
         <a href="/politique-de-confidentialite">Politique de confidentialité</a>
-        <a href="/plan-du-site">Plan du site</a>
       </div>
 
       <div className="footer-section logout">
