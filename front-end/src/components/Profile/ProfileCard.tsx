@@ -68,23 +68,11 @@ const togglePictureModal = () => {
   return (
     <div className="profile-header">
       <div className="profile-left">
-        {isOwnProfile ? (
-          <button onClick={togglePictureModal} className="profile-pic-button">
-            <img
-              className="profile-pic"
-              src={profile.profilePic || "/static/profiles_images/template_pfp.jpg"}
-              alt="Profile"
-            />
-          </button>
-        ) : (
-            <>
+
           <img
-            className="profile-pic"
-            src={profile.profilePic || "/static/profiles_images/template_pfp.jpg"}
-            alt="Profile"
+            src="/image/moshii.png" alt="Logo Moshii" className="logo" 
           />
-          </>
-        )}
+
         <h2>{profile.username}</h2>
         <p className="profile-email">{profile.email}</p>
 
@@ -110,42 +98,9 @@ const togglePictureModal = () => {
           </div>
         )}
 
-
-        {isOwnProfile && (
-          <>
-            <Button 
-                text={editing ? "Annuler" : "Modifier le profil"} 
-                onClick={() => setEditing(!editing)}
-                className="profile-button" 
-            />
-
-            {editing && (
-                <ProfileEdit
-                    username={profile.username}
-                    email={profile.email}
-                    bio={profile.bio || ""}
-                    interests={profile.interests || []}
-                    onSave={(data) => {
-                        console.log("Updated profile:", data);
-                        setEditing(false);
-                    }}
-                />
-            )}
-          </>
-        )}
     </div>
 
-        <Modal isOpen={showPictureModal} onClose={() => setShowPictureModal(false)} title="Modifier la photo">
-          <form onSubmit={handlePictureSubmit}>
-            <input
-              type="file"
-              accept="image/*"
-              aria-label="Téléverser une image de profil"
-              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-            />
-            <Button text="Enregistrer" type="submit" />
-          </form>
-        </Modal>        
+     
     </div>
   );
 }
