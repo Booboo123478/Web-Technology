@@ -18,15 +18,15 @@ public class SessionController {
     public Map<String, Object> getSessionData(HttpSession session) {
         Map<String, Object> response = new HashMap<>();
         
-        Object user = session.getAttribute("user");
         Object prestataire = session.getAttribute("prestataire");
+        Object user        = session.getAttribute("user");
 
-        if (user != null) {
-            response.put("type", "user");
-            response.put("data", user);
-        } else if (prestataire != null) {
+        if (prestataire != null) {
             response.put("type", "prestataire");
             response.put("data", prestataire);
+        } else if (user != null) {
+            response.put("type", "user");
+            response.put("data", user);
         } else {
             response.put("type", "none");
         }
