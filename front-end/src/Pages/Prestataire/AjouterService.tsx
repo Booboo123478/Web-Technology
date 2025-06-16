@@ -134,21 +134,11 @@ const AjouterService: React.FC = () => {
                 <div>
               <p>Matin</p>
               <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
-                <InputField
-                  label="De "
-                  name={`matin-${i}-debut`}
-                  type="time"
-                  value={d.matin?.debut || ''}
-                  onChange={e => handleHoraireChange(i, 'matin', 'debut', e.target.value)}
-                /> 
+                <label>De </label>
+                <input type='time' name={`matin-${i}-debut`} onChange={e => handleHoraireChange(i, 'matin', 'debut', e.target.value)} value={d.matin?.debut || ''}></input>
                 {' - '}
-                <InputField
-                  label="À "
-                  name={`matin-${i}-fin`}
-                  type="time"
-                  value={d.matin?.fin || ''}
-                  onChange={e => handleHoraireChange(i, 'matin', 'fin', e.target.value)}
-                />
+                <label>À </label>
+                <input name={`matin-${i}-fin`} type="time" value={d.matin?.fin || ''} onChange={e => handleHoraireChange(i, 'matin', 'fin', e.target.value)}></input>
                 
                 </div>
                 {(!d.matin?.debut && !d.matin?.fin) && <em> (indisponible)</em>}
@@ -156,20 +146,17 @@ const AjouterService: React.FC = () => {
                 <div>
                 <p>Après-midi </p>
                 <div style = {{ display: 'flex', gap: '1rem' }}>
-                <InputField
-                  label="De "
-                  name={`apresMidi-${i}-debut`}
+                  <label>De </label>
+                  <input name={`apresMidi-${i}-debut`}
                   type="time"
                   value={d.apresMidi?.debut || ''}
-                  onChange={e => handleHoraireChange(i, 'apresMidi', 'debut', e.target.value)}
-                />
+                  onChange={e => handleHoraireChange(i, 'apresMidi', 'debut', e.target.value)}></input>
                 {' - '}
-                <InputField
-                  label="À "
-                  name={`apresMidi-${i}-fin`}
+                <label>À</label>
+                <input  name={`apresMidi-${i}-fin`}
                   type="time"
                   value={d.apresMidi?.fin || ''}
-                  onChange={e => handleHoraireChange(i, 'apresMidi', 'fin', e.target.value)} />
+                  onChange={e => handleHoraireChange(i, 'apresMidi', 'fin', e.target.value)}></input>
                   </div>
                 {(!d.apresMidi?.debut && !d.apresMidi?.fin) && <em> (indisponible)</em>}
               

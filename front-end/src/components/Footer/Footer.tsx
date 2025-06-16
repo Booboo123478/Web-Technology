@@ -34,9 +34,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="footer-section logout">
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
+        <Button text={'Logout'} onClick={handleLogout} />
       </div>
     </footer>
   );

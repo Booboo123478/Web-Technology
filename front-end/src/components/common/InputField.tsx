@@ -12,7 +12,7 @@ interface Props {
 const InputField: React.FC<Props> = ({ label, type, value, onChange, name, placeholder }) => (
   <div className="input-group">
     <label>{label}</label>
-    <input type={type} value={value} onChange={onChange} name={name} required placeholder={placeholder} />
+    <input type={type} value={value} onChange={onChange} name={name} required={true} placeholder={placeholder} />
   </div>
 );
 

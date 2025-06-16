@@ -27,13 +27,13 @@ body {
     text-align: center;
 }
 
-/* LOGO and SOCIAL PILL */
 .footer-section.logo,
+.footer-section.logout,
 .footer-section.logout a{
     background-color: transparent;
     border: none;
     border-radius: 999px;
-    width: 20vw;
+    width: 1vw;
     height: 50px;
     padding: 0 20px;
     margin: 0 auto;

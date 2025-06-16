@@ -100,8 +100,7 @@ const MyReservationsPage: React.FC = () => {
             </div>
           );
         })}
-      </div>
-         {selectedPrestataire !== null && (
+                 {selectedPrestataire !== null && (
           <AvisForm
             idPrestataire={selectedPrestataire}
             onAvisSubmit={() => {
@@ -111,6 +110,8 @@ const MyReservationsPage: React.FC = () => {
             }}
           />
         )}
+      </div>
+
       <Footer />
     </>
   );

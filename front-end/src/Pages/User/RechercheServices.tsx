@@ -70,12 +70,6 @@ const RechercheServices: React.FC = () => {
         <InputField label="Ville" placeholder="Ville" value={ville} onChange={e => setVille(e.target.value)} type="text" />
         <InputField label="Prix min" placeholder="Prix min" value={prixMin} onChange={e => setPrixMin(e.target.value)} type="number" />
         <InputField label="Prix max" placeholder="Prix max" value={prixMax} onChange={e => setPrixMax(e.target.value)} type="number" />
-        <label>Date&nbsp;
-          <input type="date" value={date} onChange={e=>setDate(e.target.value)} />
-        </label>
-        <label>Heure&nbsp;
-          <input type="time" value={heure} onChange={e=>setHeure(e.target.value)} />
-        </label>
       </div>
 
       {feedback && <p className="feedback" style={{color:feedback.color}}>{feedback.msg}</p>}
@@ -85,16 +79,22 @@ const RechercheServices: React.FC = () => {
           <li
             key={s.idService}
             className="service-card"
-            onClick={() => window.location.href = `/services/${s.idService}`}
+            
           >
+            
             <img
               src={`/image/${s.offreImageUrl}`}
               alt={`${s.metier} à ${s.ville}`}
+              onClick={() => window.location.href = `/services/${s.idService}`}
             />
+            <div style={{display: "flex", gap: "6vw"}}>
             <div className="service-info">
               <p><strong>Métier&nbsp;:</strong> {s.metier}</p>
               <p><strong>Ville&nbsp;:</strong> {s.ville}</p>
               <p><strong>Prix&nbsp;:</strong> {s.prix} €</p>
+            </div>
+            <InputField label="Date" type='date' value={date} onChange={e=>setDate(e.target.value)} placeholder='Date' />
+            <InputField label="Heure" type="time" value={heure} onChange={e=>setHeure(e.target.value)} />
             </div>
             <button className="reserve-btn" onClick={(e)=>{e.stopPropagation();
               if(!date||!heure){setFeedback({msg:'Sélectionnez date et heure',color:'red'});return;}

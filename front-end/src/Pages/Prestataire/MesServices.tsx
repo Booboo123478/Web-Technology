@@ -94,7 +94,6 @@ const MesServices: React.FC<MesServicesProps> = ({ idPrestataire }) => {
             </div>
             <div style={{ marginLeft: 'auto' }}>
               <Button text={'Supprimer'} onClick={() => handleDelete(s.idService)} />
-              <Button text={'Modifier'} onClick={() => window.location.href = `/modifier-service/${s.idService}`} />
             </div>
           </li>
         ))}
