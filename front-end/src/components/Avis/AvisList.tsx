@@ -8,6 +8,7 @@ interface Avis {
     note: number;
     commentaire: string;
     dateAvis: string;
+    clientName?: string;
 }
 
 interface AvisListProps {
@@ -20,19 +21,37 @@ const AvisList: React.FC<AvisListProps> = ({ idPrestataire, refreshTrigger }) =>
 
     useEffect(() => {
         if (idPrestataire) {
-            axios.get(`/api/avis/prestataire/${idPrestataire}`)
-                .then(response => {
-                    setAvis(response.data);
-                })
-                .catch(error => {
-                    console.error("Erreur lors de la récupération des avis:", error);
-                });
-        }
-    }, [idPrestataire, refreshTrigger]);
+            axios
+            .get(`/api/avis/prestataire/${idPrestataire}`)
+            .then(async (response) => {
+                const avisData: Avis[] = response.data;
 
-    if (avis.length === 0) {
-        return <p>Aucun avis pour ce prestataire pour le moment.</p>;
-    }
+                const enrichedAvis = await Promise.all(
+                avisData.map(async (a) => {
+                    try {
+                    const userRes = await axios.get(`/api/users/${a.idClient}`);
+                    const user = userRes.data;
+                    return {
+                        ...a,
+                        clientName: `${user.userName}`
+                    };
+                    } catch (err) {
+                    console.error(`Erreur récupération nom client pour ID ${a.idClient}`, err);
+                    return {
+                        ...a,
+                        clientName: `Client #${a.idClient}`
+                    };
+                    }
+                })
+                );
+
+                setAvis(enrichedAvis);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la récupération des avis:", error);
+            });
+        }
+        }, [idPrestataire, refreshTrigger]);
 
     return (
         <div className="avis-list">
@@ -40,7 +59,7 @@ const AvisList: React.FC<AvisListProps> = ({ idPrestataire, refreshTrigger }) =>
             {avis.map(item => (
                 <div key={item.idAvis} className="avis-item">
                     <div className="avis-header">
-                        <span className="avis-client">Client ID: {item.idClient}</span>
+                        <span className="avis-client">{item.clientName}</span>
                         <span className="avis-note">
                             {[...Array(5)].map((_, i) => (
                                 <span key={i} className={i < item.note ? 'star selected' : 'star'}>&#9733;</span>

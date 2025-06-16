@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import AvisList from '../../components/Avis/AvisList';
 import InputField from '../../components/common/InputField';
 import axios from 'axios';
 import './RechercheServices.css';
@@ -25,6 +26,7 @@ const RechercheServices: React.FC = () => {
   const [date, setDate] = useState('');
   const [heure, setHeure] = useState('');
   const [feedback, setFeedback] = useState<{msg:string,color:string}|null>(null);
+  const [selectedPrestataireId, setSelectedPrestataireId] = useState<number | null>(null);
 
   useEffect(() => {
     fetch('/api/services')
@@ -108,6 +110,24 @@ const RechercheServices: React.FC = () => {
                 setFeedback({msg:'Réservation enregistrée !',color:'limegreen'});
               }).catch(err=>{console.error(err);setFeedback({msg:'Erreur réservation',color:'red'});});
             }}>Réserver</button>
+            <button
+              className="avis-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPrestataireId(prev =>
+                  prev === s.idPrestataire ? null : s.idPrestataire
+                );
+              }}
+            >
+              {selectedPrestataireId === s.idPrestataire ? 'Masquer les avis' : 'Voir les avis'}
+            </button>
+
+            {selectedPrestataireId === s.idPrestataire && (
+              <div className="avis-section">
+                <AvisList idPrestataire={s.idPrestataire} refreshTrigger={0} />
+              </div>
+            )}
+
           </li>
         ))}
       </ul>

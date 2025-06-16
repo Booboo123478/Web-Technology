@@ -22,7 +22,7 @@ const MyReservationsPage: React.FC = () => {
   const [reviewedIds, setReviewedIds] = useState<number[]>([]);
 
   useEffect(() => {
-    axios.get('/api/users/me').then(res => {
+    axios.get(`/api/users/me`).then(res => {
       setCurrentUserId(res.data.idUser);
     });
   }, []);
@@ -35,7 +35,7 @@ const MyReservationsPage: React.FC = () => {
   }, [currentUserId, refresh]);
 
   useEffect(()=>{
-    axios.get('/api/services').then(res=>{
+    axios.get(`/api/services`).then(res=>{
       const map:Record<number,{prestataire:number,image?:string}>={};
       res.data.forEach((s:any)=>{map[s.idService]={prestataire:s.idPrestataire,image:s.offreImageUrl};});
       setServicesMap(map);
@@ -101,6 +101,16 @@ const MyReservationsPage: React.FC = () => {
           );
         })}
       </div>
+         {selectedPrestataire !== null && (
+          <AvisForm
+            idPrestataire={selectedPrestataire}
+            onAvisSubmit={() => {
+              alert('Avis ajouté !');
+              setSelectedPrestataire(null);
+              setReviewedIds(prev => [...prev, selectedPrestataire]);
+            }}
+          />
+        )}
       <Footer />
     </>
   );

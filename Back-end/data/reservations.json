@@ -1,1 +1,13 @@
-[]
+[ {
+  "idReservation" : 1,
+  "idClient" : 10,
+  "idService" : 4,
+  "dateReservation" : "2025-06-16 10:30",
+  "statut" : "en_attente"
+}, {
+  "idReservation" : 2,
+  "idClient" : 10,
+  "idService" : 6,
+  "dateReservation" : "2025-06-16 10:30",
+  "statut" : "terminee"
+} ]
