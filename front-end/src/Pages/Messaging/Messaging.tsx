@@ -4,9 +4,9 @@ import './Messaging.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-interface User {
-    idUser: number;
-    userName: string;
+interface Person {
+    id: number;
+    name: string;
 }
 
 interface Message {
@@ -17,20 +17,34 @@ interface Message {
 }
 
 const Messaging: React.FC = () => {
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [users, setUsers] = useState<User[]>([]);
+    const [currentUser, setCurrentUser] = useState<Person | null>(null);
+    const [persons, setPersons] = useState<Person[]>([]);
     const [selectedConversation, setSelectedConversation] = useState<number | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
-        axios.get<User>('/api/users/me')
-            .then(response => setCurrentUser(response.data))
-            .catch(error => console.error("Error fetching current user:", error));
+        axios.get('/api/session')
+            .then(res => {
+                const { type, data } = res.data;
+                if (type === 'prestataire') {
+                    setCurrentUser({ id: data.idPrestataire, name: data.prestataireName });
+                } else if (type === 'user') {
+                    setCurrentUser({ id: data.idUser, name: data.userName });
+                }
+            })
+            .catch(err => console.error('Error fetching session:', err));
 
-        axios.get<User[]>('/api/users')
-            .then(response => setUsers(response.data))
-            .catch(error => console.error("Error fetching users:", error));
+        const fetchUsers = axios.get('/api/users');
+        const fetchPrestataires = axios.get('/api/prestataires');
+
+        Promise.all([fetchUsers, fetchPrestataires])
+            .then(([usersRes, prestasRes]) => {
+                const u: Person[] = usersRes.data.map((u:any)=>({id:u.idUser,name:u.userName}));
+                const p: Person[] = prestasRes.data.map((p:any)=>({id:p.idPrestataire,name:p.prestataireName}));
+                setPersons([...u,...p]);
+            })
+            .catch(err => console.error('Error fetching persons:', err));
     }, []);
 
     useEffect(() => {
@@ -65,7 +79,7 @@ const Messaging: React.FC = () => {
         });
     };
 
-    const conversationUsers = users.filter(user => user.idUser !== currentUser?.idUser);
+    const conversationUsers = persons.filter(p => p.id !== currentUser?.id);
 
     return (
         <>
@@ -73,13 +87,13 @@ const Messaging: React.FC = () => {
             <div className="messaging-container" >
                 <div className="conversations-list">
                     <h3>Conversations</h3>
-                    {conversationUsers.map(user => (
+                    {conversationUsers.map(person => (
                         <div 
-                            key={user.idUser} 
-                            className={`conversation-item ${selectedConversation === user.idUser ? 'selected' : ''}`}
-                            onClick={() => setSelectedConversation(user.idUser)}
+                            key={person.id} 
+                            className={`conversation-item ${selectedConversation === person.id ? 'selected' : ''}`}
+                            onClick={() => setSelectedConversation(person.id)}
                         >
-                            {user.userName}
+                            {person.name}
                         </div>
                     ))}
                 </div>
@@ -88,7 +102,7 @@ const Messaging: React.FC = () => {
                         <>
                             <div className="messages-list">
                                 {messages.map(msg => (
-                                    <div key={msg.idMessage} className={`message-item ${msg.idExpediteur === currentUser?.idUser ? 'sent' : 'received'}`}>
+                                    <div key={msg.idMessage} className={`message-item ${msg.idExpediteur === currentUser?.id ? 'sent' : 'received'}`}>
                                         <p>{msg.contenu}</p>
                                         <span>{new Date(msg.dateEnvoi).toLocaleTimeString()}</span>
                                     </div>
