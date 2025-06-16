@@ -83,9 +83,11 @@ const ProfilePage: React.FC = () => {
         {currentUser ? (
           <>
             <ProfileCard profile={currentUser} isOwnProfile={true} />
-            <div className="avis-section">
-              <AvisList idPrestataire={currentUser.idUser} refreshTrigger={refreshTrigger} />
-            </div>
+            {currentUser.role === 'provider' && (
+              <div className="avis-section">
+                <AvisList idPrestataire={currentUser.idUser} refreshTrigger={refreshTrigger} />
+              </div>
+            )}
           </>
         ) : (
           <p>Chargement du profil...</p>
