@@ -1,5 +1,7 @@
 import React from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
+import Button from '../../components/common/Button/Button';
 
 const Footer: React.FC = () => {
   const handleLogout = async () => {
@@ -21,7 +23,9 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-section logo">LOGO</div>
+      <Link to="/home">
+        <img src="/image/moshii.png" alt="Logo Moshii" className="logo" />
+      </Link>
 
       <div className="footer-section links">
         <a href="/cgu">CGU</a>

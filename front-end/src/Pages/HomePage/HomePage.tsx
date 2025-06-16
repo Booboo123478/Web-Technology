@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
     <><Header />
     <div className="home-page">
           <h1>Bienvenue sur la page d’accueil</h1>
-          <p>Ceci est le contenu principal.</p>
+          <p>Bienvenue sur notre site, prenez rendez-vous avec des professionnels et des particuliers !</p>
       </div><Footer /></>
   );
 };
