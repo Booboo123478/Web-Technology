@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isPrestataire, setIsPrestataire] = useState<boolean | null>(null);
@@ -23,7 +24,9 @@ const Header: React.FC = () => {
 
   return (
     <div className="navbar">
-      <div className="logo"><a href="/home">LOGO</a></div>
+      <Link to="/home">
+        <img src="/image/moshii.png" alt="Logo Moshii" className="logo" />
+      </Link>
 
       <div className="footer-section links">
         <a href={servicesLink}>Services</a>
